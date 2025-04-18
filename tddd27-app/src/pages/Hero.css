@@ -19,16 +19,22 @@
     /* border: 2px dotted black; */
 }
 
+.hero-btns {
+    margin: auto;
+}
+
 h2 {
     font-family: 'nunito-bold';
     color: aliceblue;
-    font-size: 2em;
-    margin: 0 0 -20px 0;
+    font-size: 3em;
+    margin: 0 0 -40px 0;
+    text-shadow: 0 3px #aaa;
 }
 
 h1 {
     font-family: 'feather';
     color: aliceblue;
-    font-size: 6em;
+    font-size: 8em;
     margin: 0 0 40px 0;
+    text-shadow: 0 6px #aaa;
 }

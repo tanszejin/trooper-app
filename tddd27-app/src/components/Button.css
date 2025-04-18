@@ -3,6 +3,10 @@
     margin: 0 5px;
     height: auto;
     width: auto;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 9px #bbb;
+    transition-duration: 0.1s;
 }
 
 .btn--primary {
@@ -16,6 +20,13 @@
     color: aliceblue;
 }
 
+.btn--primary:active {
+    background-color: rgba(240, 248, 255, 0.6);
+    color: aliceblue;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
 .btn--outline {
     background-color: rgba(240, 248, 255, 0.2);
     border: 2px solid aliceblue;
@@ -25,6 +36,14 @@
 .btn--outline:hover {
     background-color: rgba(240, 248, 255, 0.6);
     color: #0079bf;
+}
+
+.btn--outline:active {
+    background-color: rgba(240, 248, 255, 0.6);
+    color: #0079bf;
+    border: 2px solid transparent;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 .btn--medium {

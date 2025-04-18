@@ -7,7 +7,7 @@ function Hero() {
     <div className="hero-container">
         <div className="hero-text-container">
             <h2>Welcome to</h2>
-            <h1>Trooper</h1>
+            <h1>trooper</h1>
             <div className="hero-btns">
                 <Button onClick={() => console.log('sign in button clicked')} buttonStyle="btn--primary" buttonSize='btn--large'>
                     Sign in
