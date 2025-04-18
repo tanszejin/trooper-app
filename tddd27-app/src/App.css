@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'nunito';
+  src: url('assets/fonts/nunito.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nunito-bold';
+  src: url('assets/fonts/nunito.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'feather';
+  src: url('./assets/fonts/feather.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  /* padding: 2rem; */
+  text-align: center;
+  font-family: 'nunito';
+}
