@@ -1,11 +1,11 @@
 .hero-container {
-    background: url('images/cloud_bg.jpg') center center/cover no-repeat;
+    background: url('images/cloud_bg.jpg') bottom center/cover no-repeat;
     height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2);
+    /* box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2); */
     object-fit: fill;
     padding: 0;
     margin: 0;
@@ -13,9 +13,10 @@
 
 .hero-text-container {
     height: auto;
+    max-height: 100%;
     width: auto;
-    margin: auto;
-    padding: 0 0 180px 0;
+    margin: 0 auto;
+    margin-top: 5%;
     /* border: 2px dotted black; */
 }
 
