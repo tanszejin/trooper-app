@@ -1,6 +1,6 @@
 .trip-container {
     height: auto;
-    width: 90%;
+    width: 98%;
     margin: auto;
 }
 
@@ -9,7 +9,36 @@
     font-family: 'nunito-superbold';
     font-size: 2rem;
     justify-self: start;
-    margin: 0.5rem 0;
+    margin: 1.8rem 0.5rem;
     /* color: #0079bf; */
+}
+
+.trip-cards-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid red;
+}
+
+.trip-image-container {
+    justify-self: start;
+}
+
+.trip-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.trip-itinerary-card {
+    min-height: 20rem;
+    justify-self: end;
+}
+
+.trip-card-name {
+    font-family: 'nunito-bold';
 }
 
