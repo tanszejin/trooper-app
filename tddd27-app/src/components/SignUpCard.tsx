@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "./Button";
+import Card from "./Card";
 
 interface Props {
   setEmail: (email: string) => void;
@@ -18,18 +20,8 @@ function SignUpCard({
   handleSignUp,
 }: Props) {
   return (
-    <div
+    <Card
       className="sign-up-card"
-      style={{
-        margin: "2rem auto",
-        padding: "1.5rem",
-        border: "1px solid #ccc",
-        borderRadius: "15px",
-        width: "300px",
-        height: "auto",
-        backgroundColor: "#f9f9f9",
-        boxShadow: "0 9px #bbb",
-      }}
     >
       <input
         type="email"
@@ -91,19 +83,14 @@ function SignUpCard({
         }}
         required
       />
-      <button
+      <Button
         onClick={handleSignUp}
-        style={{
-          width: "100%",
-          borderRadius: "25px",
-          backgroundColor: "#0079bf",
-          color: "aliceblue",
-          fontFamily: "nunito-bold",
-        }}
+        buttonStyle="btn--pressed--blue"
+        buttonSize="btn--medium"
       >
         Sign up
-      </button>
-    </div>
+      </Button>
+    </Card>
   );
 }
 
