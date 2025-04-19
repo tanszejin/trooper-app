@@ -49,6 +49,28 @@
     transform: translateY(5px);
 }
 
+.btn--pressed--blue {
+    width: 90%;
+    border-radius: 25px;
+    background-color: #0079bf;
+    color: aliceblue;
+    font-family: 'nunito-bold';
+    box-shadow: 0 9px #bbb;
+    transition-duration: 0.1s;
+}
+
+.btn--pressed--blue:hover {
+    background-color: #0079bf;
+    color: aliceblue;
+}
+
+.btn--pressed--blue:active {
+    background-color: #0079bf;
+    color: aliceblue;
+    box-shadow: 0 4px #666;
+    transform: translateY(5px);
+}
+
 .btn--medium {
     font-size: medium;
 }
