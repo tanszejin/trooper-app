@@ -3,19 +3,24 @@ import React from "react";
 interface Props {
   className: string;
   children: React.ReactNode;
+  height?: string | number;
+  width?: string | number;
+  margin?: string | number;
+  padding?: string | number;
 }
 
-function Card({ className, children }: Props) {
+function Card({ className, children, height, width, margin, padding }: Props) {
   return (
     <div
       className={className}
       style={{
-        margin: "2rem auto",
-        padding: "1.5rem",
+        margin: margin ?? "2rem auto",
+        padding: padding ?? "1.5rem",
         border: "1px solid #ccc",
         borderRadius: "15px",
-        width: "300px", // i think this can still be changed in css?
-        backgroundColor: "#f9f9f9",
+        height: height ?? 'auto',
+        width: width ?? 'auto', 
+        backgroundColor: "#f9f9ff",
         boxShadow: "0 9px #bbb",
       }}
     >

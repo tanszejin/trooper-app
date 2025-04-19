@@ -21,7 +21,7 @@ function SignUpCard({
 }: Props) {
   return (
     <Card
-      className="sign-up-card"
+      className="sign-up-card" width={300}
     >
       <input
         type="email"

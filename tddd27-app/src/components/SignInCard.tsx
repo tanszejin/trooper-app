@@ -11,7 +11,7 @@ interface Props {
 function SignInCard({ setEmail, setPassword, handleSignIn }: Props) {
   return (
     <Card
-      className="sign-in-card"
+      className="sign-in-card" width={300}
     >
       <input
         type="email"
