@@ -8,6 +8,13 @@
 @font-face {
   font-family: 'nunito-bold';
   src: url('assets/fonts/nunito.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nunito-superbold';
+  src: url('assets/fonts/nunito.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
 }

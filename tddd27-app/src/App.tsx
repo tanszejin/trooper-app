@@ -6,6 +6,7 @@ import "./App.css";
 function App() {
   return (
     <Routes>
+      <Route index element={<Hero/>} />
       <Route path="/" element={<Hero/>} />
     </Routes>
   );

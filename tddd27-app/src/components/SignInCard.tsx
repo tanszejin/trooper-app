@@ -8,7 +8,8 @@ interface Props {
 
 function SignInCard({ setEmail, setPassword, handleSignIn }: Props) {
   return (
-    <div className="sign-in-card"
+    <div
+      className="sign-in-card"
       style={{
         margin: "2rem auto",
         padding: "1.5rem",
@@ -16,22 +17,43 @@ function SignInCard({ setEmail, setPassword, handleSignIn }: Props) {
         borderRadius: "15px",
         width: "300px",
         backgroundColor: "#f9f9f9",
-        boxShadow: "0 9px #bbb"
+        boxShadow: "0 9px #bbb",
       }}
     >
       <input
         type="email"
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
-        style={{ width: "100%", marginBottom: "1rem", padding: "0.5rem", borderRadius: "25px" }}
+        style={{
+          width: "100%",
+          marginBottom: "1rem",
+          padding: "0.5rem",
+          borderRadius: "25px",
+        }}
+        required
       />
       <input
         type="password"
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
-        style={{ width: "100%", marginBottom: "1rem", padding: "0.5rem", borderRadius: "25px" }}
+        style={{
+          width: "100%",
+          marginBottom: "1rem",
+          padding: "0.5rem",
+          borderRadius: "25px",
+        }}
+        required
       />
-      <button onClick={handleSignIn} style={{ width: "100%", borderRadius: "25px" }}>
+      <button
+        onClick={handleSignIn}
+        style={{
+          width: "100%",
+          borderRadius: "25px",
+          backgroundColor: "#0079bf",
+          color: "aliceblue",
+          fontFamily: 'nunito-bold'
+        }}
+      >
         Sign in
       </button>
     </div>

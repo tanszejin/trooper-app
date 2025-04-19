@@ -1,7 +1,7 @@
 import React from 'react'
 import './Button.css'
 
-const STYLES = ['btn--primary', 'btn--outline']
+const STYLES = ['btn--pressed--white', 'btn--pressed--clear']
 const SIZES = ['btn--medium', 'btn--large'];
 
 interface Props {

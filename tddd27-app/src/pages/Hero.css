@@ -21,11 +21,11 @@
 }
 
 .hero-btns {
-    margin: auto;
+    margin: 0 auto;
 }
 
 h2 {
-    font-family: 'nunito-bold';
+    font-family: 'nunito-superbold';
     color: aliceblue;
     font-size: 3em;
     margin: 0 0 -40px 0;
