@@ -1,0 +1,15 @@
+.trip-container {
+    height: auto;
+    width: 90%;
+    margin: auto;
+}
+
+.trip-name {
+    width: fit-content;
+    font-family: 'nunito-superbold';
+    font-size: 2rem;
+    justify-self: start;
+    margin: 0.5rem 0;
+    /* color: #0079bf; */
+}
+
