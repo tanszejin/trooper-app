@@ -1,0 +1,27 @@
+.navbar {
+  height: 2rem;
+  width: 100%;
+  background-color: #2a88bf;
+  position: sticky;
+  top: 0;
+  padding: 0;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid red; */
+}
+
+.navbar-title {
+  height: fit-content;
+  width: fit-content;
+  font-family: "feather";
+  color: aliceblue;
+  justify-self: start;
+  margin-left: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  /* border: 2px solid black; */
+}
