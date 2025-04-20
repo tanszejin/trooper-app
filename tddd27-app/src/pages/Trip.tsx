@@ -12,15 +12,29 @@ function Trip() {
         <div className="trip-cards-container">
           <Card
             className="trip-image-card"
-            height="20rem"
+            height="24rem"
             width="32%"
-            margin="0 10px 0 0"
+            margin="0"
             padding={0}
           >
-            <img className="trip-image" src="images/default.jpg" alt="image" />
+            <img className="trip-image" src="images/example.jpg" alt="image" />
           </Card>
-          <Card className="trip-itinerary-card" width="64%" margin="0 0 0 10px">
+          <Card className="trip-itinerary-card" width="64%" margin="0">
             <h5 className="trip-card-name">Itinerary</h5>
+          </Card>
+        </div>
+        <div className="trip-cards-container">
+          <Card className="trip-smaller-card" width="24%" margin="0 8px">
+            <h5 className="trip-card-name">Tasks</h5>
+          </Card>
+          <Card className="trip-smaller-card" width="24%" margin="0 8px">
+            <h5 className="trip-card-name">Reminders</h5>
+          </Card>
+          <Card className="trip-smaller-card" width="24%" margin="0 8px">
+            <h5 className="trip-card-name">Chat</h5>
+          </Card>
+          <Card className="trip-smaller-card" width="24%" margin="0 8px">
+            <h5 className="trip-card-name">Polls</h5>
           </Card>
         </div>
       </div>

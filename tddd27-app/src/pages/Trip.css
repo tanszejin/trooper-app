@@ -1,6 +1,6 @@
 .trip-container {
     height: auto;
-    width: 98%;
+    width: 90%;
     margin: auto;
 }
 
@@ -16,10 +16,12 @@
 .trip-cards-container {
     height: 100%;
     width: 100%;
+    min-width: 800px; /* TODO: CHANGE MIN WIDTH SO THAT ITS RESPONSIVE */
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    border: 2px solid red;
+    /* border: 2px solid red; */
+    margin-bottom: 20px;
 }
 
 .trip-image-container {
@@ -34,11 +36,17 @@
 }
 
 .trip-itinerary-card {
-    min-height: 20rem;
+    min-height: 24rem;
     justify-self: end;
+    min-width: 100px;
 }
+
+/* .trip-smaller-card {
+    min-width: 200px;
+} */
 
 .trip-card-name {
     font-family: 'nunito-bold';
+    font-size: large;
 }
 
