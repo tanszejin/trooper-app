@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Card from "./Card";
 import "./Tasks.css";
-import Button from "./Button";
 
 function Tasks() {
   const [tasks, setTasks] = useState([
@@ -10,6 +9,7 @@ function Tasks() {
     "dt",
   ]);
   const [newTask, setNewTask] = useState("");
+  const [checked, setChecked] = useState(tasks.map(_ => false));
 
   function addTask() {}
 
@@ -18,6 +18,13 @@ function Tasks() {
   function moveTaskUp(idx: number) {}
 
   function moveTaskDown(idx: number) {}
+
+  function handleCheckbox(idx: number, isChecked: boolean) {
+    let newChecked = [...checked]
+    newChecked[idx] = isChecked
+    setChecked(newChecked)
+    console.log(`checked task ${idx}, new checked: ${newChecked}`)
+  }
 
   return (
     <>
@@ -33,10 +40,10 @@ function Tasks() {
             {tasks.map((task, idx) => (
               <li key={idx}>
                 <div className="custom-checkbox-container">
-                  <input className="task-checkbox" type="checkbox" />
-                  <span className="checkmark"></span>
+                  <input className="task-checkbox" type="checkbox" checked={checked[idx]} onChange={(e) => handleCheckbox(idx, e.target.checked)}/>
+                  <span className={`checkmark ${checked[idx] ? 'checked' : ''}`}></span>
                 </div>
-                <span className="task-text">{task}</span>
+                <span className={`task-text ${checked[idx] ? 'checked' : ''}`}>{task}</span>
                 <button
                   className="delete-task-btn"
                   onClick={() => deleteTask(idx)}
@@ -61,7 +68,7 @@ function Tasks() {
         </div>
         <div className="new-task-container">
           <div className="custom-checkbox-container">
-            <input className="task-checkbox" type="checkbox" />
+            <input className="task-checkbox" type="checkbox" disabled/>
             <span className="checkmark"></span>
           </div>
           <input

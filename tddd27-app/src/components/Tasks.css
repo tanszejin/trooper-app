@@ -6,6 +6,7 @@
 ol {
   padding: 0 0.5rem;
   list-style-type: none;
+  margin: 0.5rem 0;
 }
 
 .task-list-container li {
@@ -14,6 +15,7 @@ ol {
   display: flex;
   justify-content: start;
   align-items: center;
+  /* border-radius: 5px; */
 }
 
 .task-text {
@@ -22,6 +24,11 @@ ol {
   padding: 0.5rem;
   font-size: 0.85rem;
   text-align: left;
+}
+
+.task-text.checked{
+    opacity: 0.4;
+    text-decoration: line-through;
 }
 
 .custom-checkbox-container {
@@ -56,24 +63,25 @@ ol {
   background-color: #eee;
   pointer-events: none;
   box-shadow: 0 3px #bbb;
+  border-radius: 6px;
 }
 
-.custom-checkbox-container:hover input ~ .checkmark {
+.custom-checkbox-container:hover .checkmark {
   background-color: #ccc;
 }
 
-.custom-checkbox-container input:active ~ .checkmark {
+.custom-checkbox-container:active .checkmark {
     background-color: #ccc;
     top: 50%;
     transform: translateY(-8px);
     box-shadow: 0 1px #aaa;
   }
 
-.custom-checkbox-container input:checked ~ .checkmark {
+.custom-checkbox-container .checkmark.checked {
   background-color: #2a88bf;
 }
 
-.custom-checkbox-container input:checked ~ .checkmark:after {
+.custom-checkbox-container .checkmark.checked:after {
   display: block;
   left: 7px;
   top: 5px;
@@ -101,6 +109,7 @@ button {
   display: flex;
   justify-content: start;
   align-items: center;
+  margin: 0;
   padding: 0 0.5rem;
 }
 
@@ -112,6 +121,7 @@ button {
   font-size: 0.85rem;
   text-align: left;
   border: none;
+  opacity: 0.5;
 }
 
 .new-task-input:focus {
