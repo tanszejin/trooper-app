@@ -41,9 +41,9 @@
     min-width: 100px;
 }
 
-/* .trip-smaller-card {
-    min-width: 200px;
-} */
+.trip-smaller-card {
+    align-self: flex-start;
+}
 
 .trip-card-name {
     font-family: 'nunito-bold';

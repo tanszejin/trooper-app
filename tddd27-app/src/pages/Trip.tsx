@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import "./Trip.css";
 import Card from "../components/Card";
+import Tasks from "../components/Tasks";
 
 function Trip() {
   return (
@@ -24,9 +25,7 @@ function Trip() {
           </Card>
         </div>
         <div className="trip-cards-container">
-          <Card className="trip-smaller-card" width="24%" margin="0 8px">
-            <h5 className="trip-card-name">Tasks</h5>
-          </Card>
+          <Tasks></Tasks>
           <Card className="trip-smaller-card" width="24%" margin="0 8px">
             <h5 className="trip-card-name">Reminders</h5>
           </Card>

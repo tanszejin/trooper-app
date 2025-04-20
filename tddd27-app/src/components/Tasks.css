@@ -1,0 +1,55 @@
+.task-list-container {
+    height: auto;
+    width: 100%;
+}
+
+ol {
+    padding: 0 0.5rem;
+    list-style-type: none;
+}
+
+.task-list-container li {
+    width: 100%;
+    box-shadow: 0px 2px #eee;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.task-text {
+    height: auto;
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    font-size: 0.8rem;
+    height: fit-content;
+    width: fit-content;
+}
+
+.new-task-container {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.new-task-input {
+    background-color: transparent;
+    flex: 1;
+    width: 100%;
+    padding: 0 0.5rem;
+    font-size: 0.85rem;
+    text-align: left;
+    border: none;
+}
+
+.new-task-input:focus {
+    outline: none;
+}
