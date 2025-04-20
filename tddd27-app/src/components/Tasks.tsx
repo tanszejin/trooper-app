@@ -32,7 +32,10 @@ function Tasks() {
           <ol>
             {tasks.map((task, idx) => (
               <li key={idx}>
-                <input className="task-checkbox" type="checkbox"/>
+                <div className="custom-checkbox-container">
+                  <input className="task-checkbox" type="checkbox" />
+                  <span className="checkmark"></span>
+                </div>
                 <span className="task-text">{task}</span>
                 <button
                   className="delete-task-btn"
@@ -57,7 +60,10 @@ function Tasks() {
           </ol>
         </div>
         <div className="new-task-container">
-          <input className="task-checkbox" type="checkbox"/> 
+          <div className="custom-checkbox-container">
+            <input className="task-checkbox" type="checkbox" />
+            <span className="checkmark"></span>
+          </div>
           <input
             className="new-task-input"
             type="text"

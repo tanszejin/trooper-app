@@ -1,55 +1,119 @@
 .task-list-container {
-    height: auto;
-    width: 100%;
+  height: auto;
+  width: 100%;
 }
 
 ol {
-    padding: 0 0.5rem;
-    list-style-type: none;
+  padding: 0 0.5rem;
+  list-style-type: none;
 }
 
 .task-list-container li {
-    width: 100%;
-    box-shadow: 0px 2px #eee;
-    display: flex;
-    justify-content: start;
-    align-items: center;
+  width: 100%;
+  box-shadow: 0px 2px #eee;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 .task-text {
-    height: auto;
-    flex: 1;
-    padding: 0.5rem;
-    font-size: 0.85rem;
-    text-align: left;
+  height: auto;
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.custom-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 24px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.custom-checkbox-container input {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  pointer-events: none;
+  box-shadow: 0 3px #bbb;
+}
+
+.custom-checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.custom-checkbox-container input:active ~ .checkmark {
+    background-color: #ccc;
+    top: 50%;
+    transform: translateY(-8px);
+    box-shadow: 0 1px #aaa;
+  }
+
+.custom-checkbox-container input:checked ~ .checkmark {
+  background-color: #2a88bf;
+}
+
+.custom-checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+  left: 7px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  content: "";
+  position: absolute;
 }
 
 button {
-    background-color: transparent;
-    border: none;
-    font-size: 0.8rem;
-    height: fit-content;
-    width: fit-content;
+  background-color: transparent;
+  border: none;
+  font-size: 0.8rem;
+  height: fit-content;
+  width: fit-content;
 }
 
 .new-task-container {
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding: 0 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 0 0.5rem;
 }
 
 .new-task-input {
-    background-color: transparent;
-    flex: 1;
-    width: 100%;
-    padding: 0 0.5rem;
-    font-size: 0.85rem;
-    text-align: left;
-    border: none;
+  background-color: transparent;
+  flex: 1;
+  width: 100%;
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+  text-align: left;
+  border: none;
 }
 
 .new-task-input:focus {
-    outline: none;
+  outline: none;
 }
