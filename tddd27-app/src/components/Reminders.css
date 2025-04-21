@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-ul {
+.reminders-list-container ul {
   padding: 0 0.5rem;
   list-style-type: none;
   margin: 0.5rem 0;
