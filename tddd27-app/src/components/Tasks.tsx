@@ -22,8 +22,7 @@ function Tasks() {
 
   function addTaskOnEnter(e: React.KeyboardEvent) {
     if (e.key === "Enter" && newTask != "") {
-        setTasks([...tasks, newTask])
-        setNewTask('')
+        addTask()
     }
   }
 
