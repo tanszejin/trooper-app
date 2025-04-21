@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import "./Trip.css";
 import Card from "../components/Card";
 import Tasks from "../components/Tasks";
+import Reminders from "../components/Reminders";
 
 function Trip() {
   return (
@@ -26,9 +27,7 @@ function Trip() {
         </div>
         <div className="trip-cards-container">
           <Tasks></Tasks>
-          <Card className="trip-smaller-card" width="48%" margin="0">
-            <h5 className="trip-card-name">Reminders</h5>
-          </Card>
+          <Reminders></Reminders>
         </div>
         <div className="trip-cards-container">
           <Card className="trip-smaller-card" width="64%" margin="0">
