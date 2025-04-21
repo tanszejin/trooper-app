@@ -4,6 +4,7 @@ import "./Trip.css";
 import Card from "../components/Card";
 import Tasks from "../components/Tasks";
 import Reminders from "../components/Reminders";
+import Chat from "../components/Chat";
 
 function Trip() {
   return (
@@ -30,9 +31,7 @@ function Trip() {
           <Reminders></Reminders>
         </div>
         <div className="trip-cards-container">
-          <Card className="trip-smaller-card" width="64%" margin="0">
-            <h5 className="trip-card-name">Chat</h5>
-          </Card>
+          <Chat></Chat>
           <Card className="trip-smaller-card" width="32%" margin="0">
             <h5 className="trip-card-name">Polls</h5>
           </Card>
