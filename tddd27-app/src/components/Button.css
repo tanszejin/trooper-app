@@ -55,7 +55,7 @@
     background-color: #0079bf;
     color: aliceblue;
     font-family: 'nunito-bold';
-    box-shadow: 0 9px #bbb;
+    box-shadow: 0 6px #bbb;
     transition-duration: 0.1s;
 }
 
@@ -67,8 +67,8 @@
 .btn--pressed--blue:active {
     background-color: #0079bf;
     color: aliceblue;
-    box-shadow: 0 4px #666;
-    transform: translateY(5px);
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
 }
 
 .btn--medium {
