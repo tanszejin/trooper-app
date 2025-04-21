@@ -75,19 +75,19 @@ function Tasks() {
                   className="delete-task-btn"
                   onClick={() => deleteTask(idx)}
                 >
-                  ☒
+                  <span>✚</span>
                 </button>
                 <button
                   className="move-task-btn"
                   onClick={() => moveTaskUp(idx)}
                 >
-                  ⊲
+                  <span>⊲</span>
                 </button>
                 <button
                   className="move-task-btn"
                   onClick={() => moveTaskDown(idx)}
                 >
-                  ⊳
+                  <span>⊳</span>
                 </button>
               </li>
             ))}
