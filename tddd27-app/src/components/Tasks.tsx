@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { ReactEventHandler, useState } from "react";
 import Card from "./Card";
 import "./Tasks.css";
+
+
+// TODO: change layout of cards to give more space, add assignee for tasks
 
 function Tasks() {
   const [tasks, setTasks] = useState([
@@ -11,19 +14,44 @@ function Tasks() {
   const [newTask, setNewTask] = useState("");
   const [checked, setChecked] = useState(tasks.map(_ => false));
 
-  function addTask() {}
+  function addTask() {
+    if (newTask === "") {return}
+    setTasks([...tasks, newTask])
+    setNewTask('')
+  }
 
-  function deleteTask(idx: number) {}
+  function addTaskOnEnter(e: React.KeyboardEvent) {
+    if (e.key === "Enter" && newTask != "") {
+        setTasks([...tasks, newTask])
+        setNewTask('')
+    }
+  }
 
-  function moveTaskUp(idx: number) {}
+  function deleteTask(idx: number) {
+    let updated = [...tasks]
+    updated.splice(idx, 1)
+    setTasks(updated)
+  }
 
-  function moveTaskDown(idx: number) {}
+  function moveTaskUp(idx: number) {
+    if (idx === 0) {return}
+    let updated = [...tasks]
+    updated.splice(idx-1, 2, tasks[idx], tasks[idx-1])
+    setTasks(updated)
+  }
+
+  function moveTaskDown(idx: number) {
+    if (idx === tasks.length-1) {return}
+    let updated = [...tasks]
+    updated.splice(idx, 2, tasks[idx+1], tasks[idx])
+    setTasks(updated)
+  }
 
   function handleCheckbox(idx: number, isChecked: boolean) {
-    let newChecked = [...checked]
-    newChecked[idx] = isChecked
-    setChecked(newChecked)
-    console.log(`checked task ${idx}, new checked: ${newChecked}`)
+    let updated = [...checked]
+    updated[idx] = isChecked
+    setChecked(updated)
+    console.log(`checked task ${idx}, new checked: ${updated}`)
   }
 
   return (
@@ -58,7 +86,7 @@ function Tasks() {
                 </button>
                 <button
                   className="move-task-btn"
-                  onClick={() => moveTaskUp(idx)}
+                  onClick={() => moveTaskDown(idx)}
                 >
                   ↓
                 </button>
@@ -71,12 +99,16 @@ function Tasks() {
             <input className="task-checkbox" type="checkbox" disabled/>
             <span className="checkmark"></span>
           </div>
-          <input
-            className="new-task-input"
-            type="text"
+          <textarea
+            className="new-task-textarea"
             placeholder="new task"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
+            onBlur={addTask}
+            onKeyUp={addTaskOnEnter}
+            maxLength={40}
+            wrap="soft"
+            rows={1}
           />
         </div>
       </Card>
