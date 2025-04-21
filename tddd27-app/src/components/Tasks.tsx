@@ -3,7 +3,7 @@ import Card from "./Card";
 import "./Tasks.css";
 
 
-// TODO: change layout of cards to give more space, add assignee for tasks
+// TODO: add assignee for tasks
 
 function Tasks() {
   const [tasks, setTasks] = useState([

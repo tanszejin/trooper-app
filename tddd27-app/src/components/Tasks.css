@@ -15,6 +15,7 @@ ol {
   display: flex;
   justify-content: start;
   align-items: center;
+  padding: 0.25rem 0;
   /* border-radius: 5px; */
 }
 
@@ -25,13 +26,13 @@ ol {
   font-size: 0.85rem;
   text-align: left;
   word-break: normal;
-  overflow-wrap: break-word;  
+  overflow-wrap: break-word;
   white-space: normal;
 }
 
-.task-text.checked{
-    opacity: 0.4;
-    text-decoration: line-through;
+.task-text.checked {
+  opacity: 0.4;
+  text-decoration: line-through;
 }
 
 .custom-checkbox-container {
@@ -74,11 +75,11 @@ ol {
 }
 
 .custom-checkbox-container:active .checkmark {
-    background-color: #ccc;
-    top: 50%;
-    transform: translateY(-8px);
-    box-shadow: 0 1px #aaa;
-  }
+  background-color: #ccc;
+  top: 50%;
+  transform: translateY(-8px);
+  box-shadow: 0 1px #aaa;
+}
 
 .custom-checkbox-container .checkmark.checked {
   background-color: #2a88bf;
@@ -99,12 +100,18 @@ ol {
   position: absolute;
 }
 
-button {
-  background-color: transparent;
+.task-list-container button {
+  background-color: #efefff80;
   border: none;
   font-size: 0.8rem;
   height: fit-content;
   width: fit-content;
+  border-radius: 6px;
+  margin-left: 5px;
+  /* border-right: 2px solid #ccc;
+  border-bottom: 2px solid #ccc; */
+  border-left: 2px solid #ddd;
+  border-top: 2px solid #bbb;
 }
 
 .new-task-container {
@@ -113,7 +120,7 @@ button {
   justify-content: start;
   align-items: center;
   margin: 0;
-  padding: 0 0.5rem;
+  padding: 0.25rem 0.5rem;
 }
 
 .new-task-textarea {
