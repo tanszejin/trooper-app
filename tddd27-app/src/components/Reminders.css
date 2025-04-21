@@ -42,8 +42,8 @@ ul {
   background-color: #34b2fc40;
   border: none;
   font-size: 0.8rem;
-  height: fit-content;
-  width: fit-content;
+  height: 20px;
+  width: 20px;
   border-radius: 6px;
   margin-right: 8px;
   border-left: 2px solid #ccc;
