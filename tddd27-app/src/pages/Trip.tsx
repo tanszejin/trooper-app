@@ -26,13 +26,15 @@ function Trip() {
         </div>
         <div className="trip-cards-container">
           <Tasks></Tasks>
-          <Card className="trip-smaller-card" width="24%" margin="0 8px">
+          <Card className="trip-smaller-card" width="48%" margin="0">
             <h5 className="trip-card-name">Reminders</h5>
           </Card>
-          <Card className="trip-smaller-card" width="24%" margin="0 8px">
+        </div>
+        <div className="trip-cards-container">
+          <Card className="trip-smaller-card" width="64%" margin="0">
             <h5 className="trip-card-name">Chat</h5>
           </Card>
-          <Card className="trip-smaller-card" width="24%" margin="0 8px">
+          <Card className="trip-smaller-card" width="32%" margin="0">
             <h5 className="trip-card-name">Polls</h5>
           </Card>
         </div>

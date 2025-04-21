@@ -58,8 +58,8 @@ function Tasks() {
     <>
       <Card
         className="trip-smaller-card"
-        width="24%"
-        margin="0 8px"
+        width="48%"
+        margin="0"
         padding="1.5rem 0.3rem"
       >
         <h5 className="trip-card-name">Tasks</h5>
