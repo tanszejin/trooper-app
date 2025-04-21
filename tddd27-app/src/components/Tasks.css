@@ -112,6 +112,7 @@ ol {
   border-bottom: 2px solid #ccc; */
   border-left: 2px solid #ddd;
   border-top: 2px solid #bbb;
+  transform: rotate(90deg);
 }
 
 .new-task-container {
@@ -132,7 +133,7 @@ ol {
   font-size: 0.85rem;
   text-align: left;
   border: none;
-  opacity: 0.5;
+  opacity: 0.4;
   resize: vertical;
   overflow-wrap: break-word;
   overflow: auto;
@@ -142,4 +143,5 @@ ol {
 
 .new-task-textarea:focus {
   outline: none;
+  opacity: 1;
 }
