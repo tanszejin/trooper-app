@@ -3,6 +3,7 @@ import "./Itinerary.css";
 import Card from "./Card";
 import ItineraryDay from "./ItineraryDay";
 import Button from "./Button";
+import Day from "./Day";
 
 // TODO: add day function, logic
 
@@ -96,6 +97,7 @@ function Itinerary() {
 
   const [days, setDays] = useState(getItineraryDays());
   const [newDay, setNewDay] = useState({});
+  const [showDayIdx, setShowDayIdx] = useState(-1); // the idx of the day in days
 
   function addNewDay() {}
 
@@ -110,7 +112,7 @@ function Itinerary() {
         <h5 className="trip-card-name">Itinerary</h5>
         <ul className="itinerary-days-ul">
           {days.map((day, idx) => (
-            <li key={idx}>
+            <li key={idx} onClick={() => setShowDayIdx(idx)}>
               <ItineraryDay day={day}></ItineraryDay>
             </li>
           ))}
@@ -127,6 +129,14 @@ function Itinerary() {
           </li>
         </ul>
       </Card>
+      {showDayIdx > -1 && (
+        <>
+          <div className="backdrop" onClick={() => setShowDayIdx(-1)}></div>
+          <div className="day-container">
+            <Day day={days[showDayIdx]}></Day>
+          </div>
+        </>
+      )}
     </>
   );
 }

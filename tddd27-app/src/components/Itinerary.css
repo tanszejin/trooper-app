@@ -1,6 +1,6 @@
 .trip-itinerary-card {
-    max-height: 25rem;
-    padding: 0;
+  max-height: 25rem;
+  padding: 0;
 }
 
 .itinerary-days-ul {
@@ -12,7 +12,29 @@
 }
 
 .itinerary-days-ul .add-btn-container {
-    height: 100%;
-    width: 3rem;
-    align-content: center;
+  height: 100%;
+  width: 3rem;
+  align-content: center;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  z-index: 1000;
+}
+
+.day-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 90%;
+  margin: 0;
+  z-index: 1001;
+  align-content: center;
 }

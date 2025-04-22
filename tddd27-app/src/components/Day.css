@@ -1,0 +1,14 @@
+.day-card h4 {
+    font-family: 'nunito-superbold';
+    color: #0079bf;
+    font-size: 2rem;
+}
+
+
+.day-card ul {
+    padding: 0 0.5rem;
+    list-style-type: none;
+    margin: 0.5rem 0;
+    max-height: 100%;
+    overflow-y: auto;
+  }

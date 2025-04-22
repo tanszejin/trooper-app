@@ -1,0 +1,66 @@
+.event-container {
+  min-height: 12rem;
+  width: 100%;
+  background-color: #38b6ff40;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-name-description-container {
+  /* border: 1px solid red; */
+  /* flex: 1; */
+  width: 64%;
+}
+
+.event-location-members-container {
+  width: 32%;
+}
+
+.event-container .event-name,
+.event-description {
+  width: 100%;
+  text-align: start;
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  resize: none;
+}
+
+.event-container .event-name {
+  font-family: "nunito-bold";
+  font-size: 1.2rem;
+}
+
+.event-container .event-description {
+  font-family: "nunito";
+  font-size: 0.85rem;
+}
+
+.event-container textarea:focus {
+  outline: none;
+}
+
+.event-location-members-container .information-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.event-location-members-container .icon {
+  height: 25px;
+  width: 25px;
+  align-self: center;
+  color: #0079bf;
+}
+
+.event-location-members-container .text {
+  width: 85%;
+  text-align: start;
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  resize: none;
+}

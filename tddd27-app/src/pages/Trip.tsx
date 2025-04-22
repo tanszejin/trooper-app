@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import "./Trip.css";
 import Card from "../components/Card";
@@ -7,7 +7,7 @@ import Reminders from "../components/Reminders";
 import Chat from "../components/Chat";
 import Itinerary from "../components/Itinerary";
 
-function Trip() {
+function Trip() {  
   return (
     <>
       <NavBar />
