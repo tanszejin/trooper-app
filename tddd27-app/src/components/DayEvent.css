@@ -7,6 +7,13 @@
   border-radius: 15px;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 4px #bbb;
+  transition: transform 0.3s ease;
+}
+
+.event-container:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px #ddd;
 }
 
 .event-name-description-container {
