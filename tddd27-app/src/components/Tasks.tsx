@@ -17,6 +17,7 @@ function Tasks() {
   function addTask() {
     if (newTask === "") {return}
     setTasks([...tasks, newTask])
+    setChecked([...checked, false])
     setNewTask('')
   }
 
@@ -27,23 +28,32 @@ function Tasks() {
   }
 
   function deleteTask(idx: number) {
-    let updated = [...tasks]
-    updated.splice(idx, 1)
-    setTasks(updated)
+    let updatedTasks = [...tasks]
+    updatedTasks.splice(idx, 1)
+    setTasks(updatedTasks)
+    let updatedChecked = [...checked]
+    updatedChecked.splice(idx, 1)
+    setChecked(updatedChecked)
   }
 
   function moveTaskUp(idx: number) {
     if (idx === 0) {return}
-    let updated = [...tasks]
-    updated.splice(idx-1, 2, tasks[idx], tasks[idx-1])
-    setTasks(updated)
+    let updatedTasks = [...tasks]
+    updatedTasks.splice(idx-1, 2, tasks[idx], tasks[idx-1])
+    setTasks(updatedTasks)
+    let updatedChecked = [...checked]
+    updatedChecked.splice(idx-1, 2, checked[idx], checked[idx-1])
+    setChecked(updatedChecked)
   }
 
   function moveTaskDown(idx: number) {
     if (idx === tasks.length-1) {return}
-    let updated = [...tasks]
-    updated.splice(idx, 2, tasks[idx+1], tasks[idx])
-    setTasks(updated)
+    let updatedTasks = [...tasks]
+    updatedTasks.splice(idx, 2, tasks[idx+1], tasks[idx])
+    setTasks(updatedTasks)
+    let updatedChecked = [...checked]
+    updatedChecked.splice(idx, 2, checked[idx+1], checked[idx])
+    setChecked(updatedChecked)
   }
 
   function handleCheckbox(idx: number, isChecked: boolean) {
