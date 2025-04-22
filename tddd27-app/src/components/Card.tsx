@@ -7,9 +7,10 @@ interface Props {
   width?: string | number;
   margin?: string | number;
   padding?: string | number;
+  backgroundColor?: string;
 }
 
-function Card({ className, children, height, width, margin, padding }: Props) {
+function Card({ className, children, height, width, margin, padding, backgroundColor }: Props) {
   return (
     <div
       className={className}
@@ -20,7 +21,7 @@ function Card({ className, children, height, width, margin, padding }: Props) {
         borderRadius: "15px",
         height: height ?? 'auto',
         width: width ?? 'auto', 
-        backgroundColor: "#f9f9ff",
+        backgroundColor: backgroundColor ?? "#f9f9ff",
         boxShadow: "0 9px #bbb",
       }}
     >
