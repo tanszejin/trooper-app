@@ -5,6 +5,7 @@ import Card from "../components/Card";
 import Tasks from "../components/Tasks";
 import Reminders from "../components/Reminders";
 import Chat from "../components/Chat";
+import Itinerary from "../components/Itinerary";
 
 function Trip() {
   return (
@@ -22,9 +23,7 @@ function Trip() {
           >
             <img className="trip-image" src="images/example.jpg" alt="image" />
           </Card>
-          <Card className="trip-itinerary-card" width="64%" margin="0">
-            <h5 className="trip-card-name">Itinerary</h5>
-          </Card>
+          <Itinerary></Itinerary>
         </div>
         <div className="trip-cards-container">
           <Tasks></Tasks>
