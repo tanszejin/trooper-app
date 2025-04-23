@@ -1,0 +1,67 @@
+.day-card h4 {
+  font-family: "nunito-superbold";
+  color: #0079bf;
+  font-size: 2rem;
+}
+
+.day-card ul {
+  padding: 0.5rem;
+  list-style-type: none;
+  margin: 1rem 0;
+  max-height: 92%;
+  overflow-y: auto;
+}
+
+.day-card li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.day-card DayEvent {
+  flex: 1;
+}
+
+.day-card .btn-container {
+  width: 24px;
+  align-self: flex-end;
+  margin-bottom: 2rem;
+}
+
+.day-card .btn-container button {
+  background-color: #efefff;
+  border: none;
+  font-size: 0.8rem;
+  height: 20px;
+  width: 20px;
+  border-radius: 6px;
+  box-shadow: 0 3px #ccc;
+  margin-bottom: 0.3rem;
+}
+
+.day-card .delete-event-btn span {
+  display: inline-block;
+  transform: translateY(-1px) rotate(45deg);
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+
+.day-card .move-event-btn span {
+  display: inline-block;
+  transform: translateY(-1px);
+  margin: 0;
+}
+
+.day-card .btn-container button:hover {
+    background-color: #dfdfef;
+}
+
+.day-card .btn-container button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px #aaa;
+}
+
+.day-card .add-btn-container {
+  width: 3rem;
+  margin: auto;
+}
