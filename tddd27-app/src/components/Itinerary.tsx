@@ -3,12 +3,25 @@ import "./Itinerary.css";
 import Card from "./Card";
 import ItineraryDay from "./ItineraryDay";
 import Button from "./Button";
-import Day from "./Day";
+import DayCard from "./DayCard";
 
 // TODO: add day function, logic
+type Event = {
+  name: string;
+  description: string;
+  time: string;
+  location: string;
+  members: string;
+};
+
+type Day = {
+  date: string;
+  events: Event[];
+};
+
 
 function Itinerary() {
-  function getItineraryDays() {
+  function getItineraryDays(): Day[] {
     // TODO: update function
     // gets the days in an itinerary, and the events and time for each day
     return [
@@ -17,11 +30,17 @@ function Itinerary() {
         events: [
           {
             name: "first event",
+            description: "",
             time: "10.00AM",
+            location: "",
+            members: ""
           },
           {
             name: "second event",
+            description: "",
             time: "3.00PM",
+            location: "",
+            members: ""
           },
         ],
       },
@@ -30,23 +49,38 @@ function Itinerary() {
         events: [
           {
             name: "first event on day two",
+            description: "",
             time: "11.00AM",
+            location: "",
+            members: ""
           },
           {
             name: "second event on day two",
+            description: "",
             time: "1.00PM",
+            location: "",
+            members: ""
           },
           {
             name: "third event on day two",
+            description: "",
             time: "4.00PM",
+            location: "",
+            members: ""
           },
           {
             name: "fourth event on day two",
+            description: "",
             time: "6.00PM",
+            location: "",
+            members: ""
           },
           {
             name: "fifth event on day two",
+            description: "",
             time: "8.00PM",
+            location: "",
+            members: ""
           },
         ],
       },
@@ -55,23 +89,38 @@ function Itinerary() {
         events: [
           {
             name: "first event on day three",
+            description: "",
             time: "11.00AM",
+            location: "",
+            members: ""
           },
           {
             name: "second event on day three",
+            description: "",
             time: "1.00PM",
+            location: "",
+            members: ""
           },
           {
             name: "third event on day three",
+            description: "",
             time: "4.00PM",
+            location: "",
+            members: ""
           },
           {
             name: "fourth event on day three",
+            description: "",
             time: "6.00PM",
+            location: "",
+            members: ""
           },
           {
             name: "fifth event on day three",
+            description: "",
             time: "8.00PM",
+            location: "",
+            members: ""
           },
         ],
       },
@@ -80,15 +129,24 @@ function Itinerary() {
         events: [
           {
             name: "first event on day four",
+            description: "",
             time: "11.00AM",
+            location: "",
+            members: ""
           },
           {
             name: "second event on day four",
+            description: "",
             time: "1.00PM",
+            location: "",
+            members: ""
           },
           {
             name: "third event on day four",
+            description: "",
             time: "4.00PM",
+            location: "",
+            members: ""
           },
         ],
       },
@@ -133,7 +191,7 @@ function Itinerary() {
         <>
           <div className="backdrop" onClick={() => setShowDayIdx(-1)}></div>
           <div className="day-container">
-            <Day day={days[showDayIdx]}></Day>
+            <DayCard day={days[showDayIdx]}></DayCard>
           </div>
         </>
       )}

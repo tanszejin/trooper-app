@@ -4,38 +4,36 @@ import { FaClock, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 
 type Event = {
   name: string;
+  description: string;
   time: string;
-  // and more
+  location: string;
+  members: string;
 };
 
 interface Props {
   event: Event;
+  onChange: (updatedPart: Partial<Event>) => void;
 }
 
-function DayEvent({ event }: Props) {
+function DayEvent({ event, onChange }: Props) {
   // TODO: implement a way to edit these, need to be updated to database
-  const [eventName, setEventName] = useState(event.name);
-  const [eventTime, setEventTime] = useState(event.time);
-  const [eventDescription, setEventDescription] = useState("");
-  const [eventLocation, setEventLocation] = useState("");
-  const [eventMembers, setEventMembers] = useState("");
 
   return (
     <div className="event-container">
       <div className="event-text-info-container">
         <textarea
           className="event-name"
-          value={eventName}
+          value={event.name}
           placeholder="event name..."
-          onChange={(e) => setEventName(e.target.value)} // update database too
+          onChange={(e) => onChange({name: e.target.value})} // update database too
           rows={2}
           maxLength={44}
         />
         <textarea
           className="event-description"
-          value={eventDescription}
+          value={event.description}
           placeholder="enter any descriptions or notes..."
-          onChange={(e) => setEventDescription(e.target.value)}
+          onChange={(e) => onChange({description: e.target.value})}
           rows={4}
           maxLength={400}
         />
@@ -47,8 +45,8 @@ function DayEvent({ event }: Props) {
             className="text"
             rows={1}
             placeholder="time..."
-            value={eventTime}
-            onChange={(e) => setEventTime(e.target.value)}
+            value={event.time}
+            onChange={(e) => onChange({time: e.target.value})}
           />
         </div>
         <div className="information-container">
@@ -57,8 +55,8 @@ function DayEvent({ event }: Props) {
             className="text"
             rows={1}
             placeholder="location..."
-            value={eventLocation}
-            onChange={(e) => setEventLocation(e.target.value)}
+            value={event.location}
+            onChange={(e) => onChange({time: e.target.value})}
           />
         </div>
         <div className="information-container">
@@ -67,8 +65,8 @@ function DayEvent({ event }: Props) {
             className="text"
             rows={1}
             placeholder="members..."
-            value={eventMembers}
-            onChange={(e) => setEventMembers(e.target.value)}
+            value={event.members}
+            onChange={(e) => onChange({members: e.target.value})}
           />
         </div>
       </div>
