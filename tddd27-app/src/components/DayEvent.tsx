@@ -16,7 +16,7 @@ interface Props {
 }
 
 function DayEvent({ event, onChange }: Props) {
-  // TODO: implement a way to edit these, need to be updated to database
+  // TODO: fix the textareas, dont allow multiple lines etc
 
   return (
     <div className="event-container">
@@ -56,7 +56,7 @@ function DayEvent({ event, onChange }: Props) {
             rows={1}
             placeholder="location..."
             value={event.location}
-            onChange={(e) => onChange({time: e.target.value})}
+            onChange={(e) => onChange({location: e.target.value})}
           />
         </div>
         <div className="information-container">

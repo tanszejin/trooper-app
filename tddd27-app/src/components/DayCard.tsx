@@ -6,6 +6,7 @@ import Button from "./Button";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 type Event = {
+  id: string;
   name: string;
   description: string;
   time: string;
@@ -23,11 +24,15 @@ interface Props {
 }
 
 function Day({ day }: Props) {
+  // change so that it gets day info directly from backend, receives id to find data in props
+  // or propagate the information from itinerary?
+
   const [events, setEvents] = useState(day.events);
 
   function addNewEvent() {
     // change to backend function
     let newEvent = {
+        id: crypto.randomUUID(),
         name: "",
         description: "",
         time: "",
@@ -43,7 +48,6 @@ function Day({ day }: Props) {
     let updated = [...events];
     updated.splice(idx, 1);
     setEvents(updated);
-    console.log("new events array: ", updated);
   }
 
   function moveEventUp(idx: number) {
@@ -77,7 +81,7 @@ function Day({ day }: Props) {
         <h4>{day.date}</h4>
         <ul>
           {events.map((evnt, idx) => (
-            <li key={idx}>
+            <li key={evnt.id}>
               <DayEvent
                 event={evnt}
                 onChange={(updatedPart) => updateEvent(idx, updatedPart)}
@@ -108,7 +112,7 @@ function Day({ day }: Props) {
               </div>
             </li>
           ))}
-          <li key={-1}>
+          <li key={"add-btn"}>
             <div className="add-btn-container">
               <Button
                 onClick={addNewEvent}
