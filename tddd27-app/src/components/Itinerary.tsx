@@ -7,6 +7,7 @@ import DayCard from "./DayCard";
 
 // TODO: add day function, logic
 type Event = {
+  id: string;
   name: string;
   description: string;
   time: string;
@@ -19,28 +20,30 @@ type Day = {
   events: Event[];
 };
 
-
 function Itinerary() {
   function getItineraryDays(): Day[] {
     // TODO: update function
     // gets the days in an itinerary, and the events and time for each day
+    // gets directly from backend
     return [
       {
         date: "22 Apr",
         events: [
           {
+            id: crypto.randomUUID(),
             name: "first event",
             description: "",
             time: "10.00AM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "second event",
             description: "",
             time: "3.00PM",
             location: "",
-            members: ""
+            members: "",
           },
         ],
       },
@@ -48,39 +51,44 @@ function Itinerary() {
         date: "23 Apr",
         events: [
           {
+            id: crypto.randomUUID(),
             name: "first event on day two",
             description: "",
             time: "11.00AM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "second event on day two",
             description: "",
             time: "1.00PM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "third event on day two",
             description: "",
             time: "4.00PM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "fourth event on day two",
             description: "",
             time: "6.00PM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "fifth event on day two",
             description: "",
             time: "8.00PM",
             location: "",
-            members: ""
+            members: "",
           },
         ],
       },
@@ -88,39 +96,44 @@ function Itinerary() {
         date: "24 Apr",
         events: [
           {
+            id: crypto.randomUUID(),
             name: "first event on day three",
             description: "",
             time: "11.00AM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "second event on day three",
             description: "",
             time: "1.00PM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "third event on day three",
             description: "",
             time: "4.00PM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "fourth event on day three",
             description: "",
             time: "6.00PM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "fifth event on day three",
             description: "",
             time: "8.00PM",
             location: "",
-            members: ""
+            members: "",
           },
         ],
       },
@@ -128,25 +141,28 @@ function Itinerary() {
         date: "25 Apr",
         events: [
           {
+            id: crypto.randomUUID(),
             name: "first event on day four",
             description: "",
             time: "11.00AM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "second event on day four",
             description: "",
             time: "1.00PM",
             location: "",
-            members: ""
+            members: "",
           },
           {
+            id: crypto.randomUUID(),
             name: "third event on day four",
             description: "",
             time: "4.00PM",
             location: "",
-            members: ""
+            members: "",
           },
         ],
       },
@@ -158,6 +174,12 @@ function Itinerary() {
   const [showDayIdx, setShowDayIdx] = useState(-1); // the idx of the day in days
 
   function addNewDay() {}
+
+  // function updateDays(idx: number, updatedPart: Partial<Day>) {
+  //   let newDays = [...days];
+  //   newDays[idx] = { ...newDays[idx], ...updatedPart };
+  //   setDays(newDays);
+  // }
 
   return (
     <>
