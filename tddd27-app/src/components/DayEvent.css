@@ -16,13 +16,13 @@
     box-shadow: 0 10px #ddd;
 }
 
-.event-name-description-container {
+.event-text-info-container {
   /* border: 1px solid red; */
   /* flex: 1; */
   width: 64%;
 }
 
-.event-location-members-container {
+.event-other-info-container {
   width: 32%;
 }
 
@@ -50,23 +50,24 @@
   outline: none;
 }
 
-.event-location-members-container .information-container {
+.event-other-info-container .information-container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
 }
 
-.event-location-members-container .icon {
+.event-other-info-container .icon {
   height: 25px;
   width: 25px;
   align-self: center;
   color: #0079bf;
 }
 
-.event-location-members-container .text {
+.event-other-info-container .text {
   width: 85%;
   text-align: start;
   background-color: transparent;
+  margin-left: 0.5rem;
   border: none;
   overflow: hidden;
   resize: none;

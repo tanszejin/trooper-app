@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./DayEvent.css";
-import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
+import { FaClock, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 
 type Event = {
   name: string;
@@ -22,7 +22,7 @@ function DayEvent({ event }: Props) {
 
   return (
     <div className="event-container">
-      <div className="event-name-description-container">
+      <div className="event-text-info-container">
         <textarea
           className="event-name"
           value={eventName}
@@ -40,7 +40,17 @@ function DayEvent({ event }: Props) {
           maxLength={400}
         />
       </div>
-      <div className="event-location-members-container">
+      <div className="event-other-info-container">
+        <div className="information-container">
+          <FaClock className="icon" />
+          <textarea
+            className="text"
+            rows={1}
+            placeholder="time..."
+            value={eventTime}
+            onChange={(e) => setEventTime(e.target.value)}
+          />
+        </div>
         <div className="information-container">
           <FaMapMarkerAlt className="icon" />
           <textarea
