@@ -1,13 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.css'
-import App from './App.tsx'
+import App from "./App.tsx";
+import { AuthProvider } from "./contexts/authContext/index.tsx";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
         <App />
-    </BrowserRouter>
-  </StrictMode>,
-)
+      </BrowserRouter>
+    </AuthProvider>
+  </StrictMode>
+);

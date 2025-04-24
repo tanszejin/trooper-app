@@ -5,15 +5,15 @@ import "./App.css";
 import Hero from "./pages/Hero";
 import Home from "./pages/Home";
 import Trip from "./pages/Trip";
+import { useAuth } from "./contexts/authContext";
 
 
 function App() {
-  // use hooks to get if user is logged in
-  const user = true;
+  const {userLoggedIn} = useAuth();
 
   return (
     <>
-      {user ? (
+      {userLoggedIn ? (
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/exampletrip" element={<Trip />} />

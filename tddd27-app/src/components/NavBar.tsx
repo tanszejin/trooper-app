@@ -1,10 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import Button from "./Button";
+import { useAuth } from "../contexts/authContext";
+import { doSignOut } from "../firebase/auth";
 
 function NavBar() {
-  function signOut() {}
+  const navigate = useNavigate();
+  const { userLoggedIn } = useAuth();
+
+  function signOut() {
+    if (!userLoggedIn) {
+      console.log("sign out error, user not logged in");
+      return;
+    }
+    doSignOut();
+    navigate("/");
+  }
 
   return (
     <nav className="navbar">
