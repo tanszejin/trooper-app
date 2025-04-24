@@ -1,5 +1,5 @@
 .navbar {
-  height: 2rem;
+  height: 2.4rem;
   width: 100%;
   background-color: #2a88bf;
   position: sticky;
@@ -9,10 +9,11 @@
 }
 
 .navbar-container {
+  height: 100%;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  /* border: 2px solid red; */
 }
 
 .navbar-title {
@@ -26,3 +27,14 @@
   text-decoration: none;
   /* border: 2px solid black; */
 }
+
+.navbar-right-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2px;
+  margin-right: 5px;
+}
+
+
