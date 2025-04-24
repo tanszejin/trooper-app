@@ -1,26 +1,41 @@
-import React from 'react'
-import './Button.css'
+import React from "react";
+import "./Button.css";
 
-const STYLES = ['btn--pressed--white', 'btn--pressed--clear', 'btn--pressed--blue']
-const SIZES = ['btn--medium', 'btn--large'];
+const COLORS = ["btn--white", "btn--clear", "btn--blue"];
+const STYLES = ["btn--morepress", "btn--mediumpress", "btn--lesspress"];
+const SIZES = ["btn--medium", "btn--large", "btn--small"];
 
 interface Props {
-    children: string,
-    onClick: () => void,
-    buttonStyle: string,
-    buttonSize: string
+  children: string;
+  onClick: () => void;
+  buttonColor: string;
+  buttonSize: string;
+  buttonStyle: string;
 }
 
-function Button({children, onClick, buttonStyle, buttonSize}: Props) {
-    const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0];
-    const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
+function Button({
+  children,
+  onClick,
+  buttonColor,
+  buttonSize,
+  buttonStyle,
+}: Props) {
+  const checkButtonColor = COLORS.includes(buttonColor)
+    ? buttonColor
+    : COLORS[0];
+  const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
+  const checkButtonStyle = STYLES.includes(buttonStyle)
+    ? buttonStyle
+    : STYLES[0];
 
-    return (
-        <button className={`btn ${checkButtonStyle} ${checkButtonSize}`}
-        onClick={onClick}>
-            {children}
-        </button>
-    )
+  return (
+    <button
+      className={`btn ${checkButtonColor} ${checkButtonSize} ${checkButtonStyle}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
 }
 
-export default Button
+export default Button;

@@ -21,7 +21,7 @@ function Trip() {
             margin="0"
             padding={0}
           >
-            <img className="trip-image" src="images/example.jpg" alt="image" />
+            <img className="trip-image" src="../public/images/example.jpg" alt="image" />
           </Card>
           <Itinerary></Itinerary>
         </div>

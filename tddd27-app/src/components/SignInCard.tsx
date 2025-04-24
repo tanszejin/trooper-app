@@ -39,7 +39,8 @@ function SignInCard({ setEmail, setPassword, handleSignIn }: Props) {
       />
       <Button
         onClick={handleSignIn}
-        buttonStyle="btn--pressed--blue"
+        buttonColor="btn--blue"
+        buttonStyle="btn--mediumpress"
         buttonSize="btn--medium"
       >
         Sign in

@@ -52,14 +52,16 @@ function Hero() {
         <div className="hero-btns">
           <Button
             onClick={onSignInClick}
-            buttonStyle="btn--pressed--white"
+            buttonColor="btn--white"
+            buttonStyle="btn--morepress"
             buttonSize="btn--large"
           >
             Sign in
           </Button>
           <Button
             onClick={onSignUpClick}
-            buttonStyle="btn--pressed--clear"
+            buttonColor="btn--clear"
+            buttonStyle="btn--morepress"
             buttonSize="btn--large"
           >
             Sign up

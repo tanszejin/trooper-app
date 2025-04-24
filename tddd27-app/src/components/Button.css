@@ -8,67 +8,67 @@
     font-family: 'nunito-bold';
 }
 
-.btn--pressed--white {
+.btn--white {
     background-color: aliceblue;
     color: #0079bf;
     border: 2px solid aliceblue;
+}
+
+.btn--white:hover {
+    background-color: rgba(240, 248, 255, 0.6);
+    color: aliceblue;
+}
+
+.btn--morepress {
     box-shadow: 0 9px #bbb;
     transition-duration: 0.1s;
 }
 
-.btn--pressed--white:hover {
-    background-color: rgba(240, 248, 255, 0.6);
-    color: aliceblue;
-}
-
-.btn--pressed--white:active {
-    background-color: rgba(240, 248, 255, 0.6);
-    color: aliceblue;
+.btn--morepress:active {
     box-shadow: 0 4px #666;
     transform: translateY(5px);
 }
 
-.btn--pressed--clear {
+.btn--clear {
     background-color: rgba(240, 248, 255, 0.2);
     border: 2px solid aliceblue;
     color: aliceblue;
-    box-shadow: 0 9px #bbb;
-    transition-duration: 0.1s;
 }
 
-.btn--pressed--clear:hover {
+.btn--clear:hover {
     background-color: rgba(240, 248, 255, 0.6);
     color: #0079bf;
 }
 
-.btn--pressed--clear:active {
-    background-color: rgba(240, 248, 255, 0.6);
-    color: #0079bf;
-    border: 2px solid transparent;
-    box-shadow: 0 4px #666;
-    transform: translateY(5px);
-}
-
-.btn--pressed--blue {
+.btn--blue {
     width: 90%;
     border-radius: 25px;
     background-color: #0079bf;
     color: aliceblue;
     font-family: 'nunito-bold';
+}
+
+.btn--blue:hover {
+    background-color: #0079bf;
+    color: aliceblue;
+}
+
+.btn--mediumpress {
     box-shadow: 0 6px #bbb;
-    transition-duration: 0.1s;
 }
 
-.btn--pressed--blue:hover {
-    background-color: #0079bf;
-    color: aliceblue;
-}
-
-.btn--pressed--blue:active {
-    background-color: #0079bf;
-    color: aliceblue;
+.btn--mediumpress:active {
     box-shadow: 0 2px #666;
     transform: translateY(4px);
+}
+
+.btn--lesspress {
+    box-shadow: 0 4px #bbb;
+}
+
+.btn--lesspress:active {
+    box-shadow: 0 1px #666;
+    transform: translateY(3px);
 }
 
 .btn--medium {
@@ -77,4 +77,9 @@
 
 .btn--large {
     font-size: larger;
+}
+
+.btn--small {
+    padding: 0.1rem 0.5rem;
+    font-size: 0.7rem;
 }

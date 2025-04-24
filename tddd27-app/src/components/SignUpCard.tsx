@@ -85,7 +85,8 @@ function SignUpCard({
       />
       <Button
         onClick={handleSignUp}
-        buttonStyle="btn--pressed--blue"
+        buttonColor="btn--blue"
+        buttonStyle="btn--mediumpress"
         buttonSize="btn--medium"
       >
         Sign up

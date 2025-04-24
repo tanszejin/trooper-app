@@ -200,7 +200,8 @@ function Itinerary() {
             <div className="add-btn-container">
               <Button
                 onClick={addNewDay}
-                buttonStyle="btn--pressed--blue"
+                buttonColor="btn--blue"
+                buttonStyle="btn--mediumpress"
                 buttonSize="btn--large"
               >
                 +

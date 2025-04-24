@@ -116,7 +116,8 @@ function Day({ day }: Props) {
             <div className="add-btn-container">
               <Button
                 onClick={addNewEvent}
-                buttonStyle="btn--pressed--blue"
+                buttonColor="btn--blue"
+                buttonStyle="btn--mediumpress"
                 buttonSize="btn--large"
               >
                 +
