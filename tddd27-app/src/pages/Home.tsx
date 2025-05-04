@@ -14,30 +14,30 @@ function Home() {
   const [showNavBar, setShowNavBar] = useState(true);
 
   function getUserTrips() {
-    // TODO: babckend
+    // TODO: babckend, clicking card, add new trip
     return [{
       name: "Scotland",
-      imageUrl: "/images/example.jpg"
+      imageUrl: "/images/example_1.jpg"
     },
     {
       name: "Austria",
-      imageUrl: "/images/example.jpg"
+      imageUrl: "/images/example_2.jpg"
     },
     {
       name: "Germany",
-      imageUrl: "/images/example.jpg"
+      imageUrl: "/images/example_3.jpg"
     },
     {
       name: "Italy",
-      imageUrl: "/images/example.jpg"
+      imageUrl: "/images/example_4.jpg"
     },
     {
       name: "Switzerland",
-      imageUrl: "/images/example.jpg"
+      imageUrl: "/images/example_5.jpg"
     },
     {
       name: "Spain",
-      imageUrl: "/images/example.jpg"
+      imageUrl: "/images/example_6.jpg"
     },
   ]
   }

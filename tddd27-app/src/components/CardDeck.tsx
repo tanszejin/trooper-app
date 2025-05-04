@@ -62,6 +62,7 @@ function CardDeck({ contents, onClick }: Props) {
             margin={0}
           >
             <img src={c.imageUrl}></img>
+            <div className="img-cover"></div>
             <div className="carddeck-title-container">
               <h5>{c.name}</h5>
             </div>
