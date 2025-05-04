@@ -24,8 +24,9 @@ function CardDeck({ contents, onClick }: Props) {
   // handle window resizing, TODO: add this for all other responsive ui
   useEffect(() => {
     const handleResize = () => {
+      const size = window.innerWidth < 800 ? 800 : window.innerWidth;
       setOffset(
-        (CARDDECK_SIZE_RATIO * window.innerWidth - CARD_WIDTH) /
+        (CARDDECK_SIZE_RATIO * size - CARD_WIDTH) /
           (contents.length - 1)
       );
     };
@@ -44,8 +45,8 @@ function CardDeck({ contents, onClick }: Props) {
           style={{
             zIndex: 900 - idx,
             transform: `translateX(${
-              (hoveredIndex && idx < hoveredIndex ? -150 : 0) +
-              (hoveredIndex && idx >= hoveredIndex ? 100 : 0) +
+              (hoveredIndex && idx < hoveredIndex ? -170 : 0) +
+              (hoveredIndex && idx >= hoveredIndex ? 120 : 0) +
               offset * idx
             }px)`,
           }}
@@ -58,6 +59,7 @@ function CardDeck({ contents, onClick }: Props) {
             padding={0}
             height={"23rem"}
             width={"25rem"}
+            margin={0}
           >
             <img src={c.imageUrl}></img>
             <div className="carddeck-title-container">
