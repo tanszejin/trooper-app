@@ -1,18 +1,63 @@
-import React, { useState } from 'react'
-import NavBar from '../components/NavBar'
-import './Home.css'
-
+import React, { useState } from "react";
+import NavBar from "../components/NavBar";
+import "./Home.css";
+import { useAuth } from "../contexts/authContext";
+import { Navigate, useNavigate } from "react-router-dom";
+import { auth } from "../firebase/firebase";
+import CardDeck from "../components/CardDeck";
 
 function Home() {
-  
-  const [showNavBar, setShowNavBar] = useState(false);
+  const navigate = useNavigate();
+  const { userLoggedIn } = useAuth();
+  const currentUser = auth.currentUser;
+
+  const [showNavBar, setShowNavBar] = useState(true);
+
+  function getUserTrips() {
+    // TODO: babckend
+    return [{
+      name: "Scotland",
+      imageUrl: "/images/example.jpg"
+    },
+    {
+      name: "Austria",
+      imageUrl: "/images/example.jpg"
+    },
+    {
+      name: "Austria",
+      imageUrl: "/images/example.jpg"
+    },
+    {
+      name: "Austria",
+      imageUrl: "/images/example.jpg"
+    },
+    {
+      name: "Austria",
+      imageUrl: "/images/example.jpg"
+    },
+    {
+      name: "Austria",
+      imageUrl: "/images/example.jpg"
+    },
+  ]
+  }
+
+  function handleCardDeckClick(idx: number) {
+
+  }
 
   return (
-    <div className="home-container">
-      {showNavBar && <NavBar />}
-      <h1>Home page</h1>
-    </div>
-  )
+    <>
+    {!userLoggedIn && <Navigate to={"/hero"} replace={true} />}
+      <div className="home-container">
+        {showNavBar && <NavBar navbarColor="navbar--lightblue"/>}
+        <h1>Welcome, {currentUser!=null ? currentUser.email : ""}</h1>
+        <div className="carddeck-container">
+          <CardDeck contents={getUserTrips()} onClick={(idx: number) => handleCardDeckClick(idx)}></CardDeck>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Home
+export default Home;

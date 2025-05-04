@@ -1,0 +1,28 @@
+.carddeck {
+}
+
+.carddeck-card-container {
+  display: grid;
+}
+
+.carddeck-card-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  grid-area: 1 / 1;
+}
+
+.carddeck-card-container .carddeck-title-container {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.carddeck-card-container h5 {
+  font-family: "nunito-superbold";
+  font-size: 2.5rem;
+  color: aliceblue;
+  text-shadow: 0 3px #333;
+}
