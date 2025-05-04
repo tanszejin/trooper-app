@@ -1,7 +1,17 @@
 .carddeck {
+  display: grid;
+  place-items: start;
+  width: 60vw;
+  margin: auto;
+  border: 1px solid red;
 }
 
 .carddeck-card-container {
+  grid-area: 1 / 1;
+  transition: transform 0.5s ease;
+}
+
+.carddeck-card {
   display: grid;
 }
 
@@ -22,7 +32,7 @@
 
 .carddeck-card-container h5 {
   font-family: "nunito-superbold";
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   color: aliceblue;
   text-shadow: 0 3px #333;
 }

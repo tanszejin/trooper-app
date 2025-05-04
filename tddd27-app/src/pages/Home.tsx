@@ -24,19 +24,19 @@ function Home() {
       imageUrl: "/images/example.jpg"
     },
     {
-      name: "Austria",
+      name: "Germany",
       imageUrl: "/images/example.jpg"
     },
     {
-      name: "Austria",
+      name: "Italy",
       imageUrl: "/images/example.jpg"
     },
     {
-      name: "Austria",
+      name: "Switzerland",
       imageUrl: "/images/example.jpg"
     },
     {
-      name: "Austria",
+      name: "Spain",
       imageUrl: "/images/example.jpg"
     },
   ]
