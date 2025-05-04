@@ -24,7 +24,7 @@
     margin: 0 auto;
 }
 
-h2 {
+.hero-text-container h2 {
     font-family: 'nunito-superbold';
     color: aliceblue;
     font-size: 3em;
@@ -32,7 +32,7 @@ h2 {
     text-shadow: 0 3px #aaa;
 }
 
-h1 {
+.hero-text-container h1 {
     font-family: 'feather';
     color: aliceblue;
     font-size: 8em;

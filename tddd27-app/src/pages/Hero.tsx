@@ -67,9 +67,7 @@ function Hero() {
       console.log(err);
     });
   };
-
-  // write the functions for sign up
-  // implement google sign in on ui
+  // TODO: implement google sign in on ui
 
   const handleSignUp = async () => {
     console.log(
