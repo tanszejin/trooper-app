@@ -10,7 +10,7 @@ import Itinerary from "../components/Itinerary";
 function Trip() {  
   return (
     <>
-      <NavBar />
+      <NavBar navbarColor="navbar--blue"/>
       <div className="trip-container">
         <h3 className="trip-name">Trip name</h3>
         <div className="trip-cards-container">

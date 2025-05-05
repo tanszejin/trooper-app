@@ -3,8 +3,8 @@ import "./CardDeck.css";
 import Card from "./Card";
 
 type content = {
-  name: string;
-  imageUrl: string;
+  trip_name: string;
+  image_url: string;
 };
 
 interface Props {
@@ -27,7 +27,7 @@ function CardDeck({ contents, onClick }: Props) {
       const size = window.innerWidth < 800 ? 800 : window.innerWidth;
       setOffset(
         (CARDDECK_SIZE_RATIO * size - CARD_WIDTH) /
-          (contents.length - 1)
+          (contents.length<=1 ? 1 : contents.length - 1)
       );
     };
     window.addEventListener("resize", handleResize);
@@ -52,6 +52,7 @@ function CardDeck({ contents, onClick }: Props) {
           }}
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
+          onClick={() => onClick(idx)}
         >
           <Card
             key={idx}
@@ -61,10 +62,10 @@ function CardDeck({ contents, onClick }: Props) {
             width={"25rem"}
             margin={0}
           >
-            <img src={c.imageUrl}></img>
+            <img src={c.image_url}></img>
             <div className="img-cover"></div>
             <div className="carddeck-title-container">
-              <h5>{c.name}</h5>
+              <h5>{c.trip_name}</h5>
             </div>
           </Card>
         </div>

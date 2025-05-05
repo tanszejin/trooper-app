@@ -53,7 +53,7 @@ function Hero() {
       setIsSigningIn(false);
       console.log(err);
     });
-    console.log(cred)
+    console.log(cred);
   };
 
   const onGoogleSignIn = async () => {
@@ -84,12 +84,16 @@ function Hero() {
     }
     setIsSigningUp(true);
     // TODO: input validation
-    await doCreateUserWithEmailAndPassword(signUpEmail, signUpPassword).catch(
-      (err) => {
-        setIsSigningUp(false);
-        console.log(err);
-      }
-    );
+    await doCreateUserWithEmailAndPassword(
+      signUpEmail,
+      signUpFirstName,
+      signUpLastName,
+      signUpPassword,
+      signUpConfirmPassword
+    ).catch((err) => {
+      setIsSigningUp(false);
+      console.error(err);
+    });
   };
 
   return (
