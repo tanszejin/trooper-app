@@ -20,7 +20,6 @@ function Home() {
   const navigate = useNavigate();
   const { userLoggedIn } = useAuth();
   const currentUser = auth.currentUser;
-  let userId = null;
 
   const [showNavBar, setShowNavBar] = useState(true);
 
@@ -85,7 +84,7 @@ function Home() {
 
   function handleCardDeckClick(idx: number) {
     const tripId = trips[idx].id;
-    navigate("/trips/" + tripId);
+    navigate("/trip/" + tripId);
   }
 
   return (

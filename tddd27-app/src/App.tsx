@@ -16,7 +16,7 @@ function App() {
       {userLoggedIn ? (
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/exampletrip" element={<Trip />} />
+          <Route path="/trip/:tripId" element={<Trip />} />
           <Route path="*" element={<Home />} />
         </Routes>
       ) : (
