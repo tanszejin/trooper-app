@@ -93,14 +93,15 @@ function Tasks({ tripId }: Props) {
 
   async function swapOrder(a: number, b: number) {
     try {
-      await updateDoc(doc(tasksCollectionRef, tasks[a].id), {
-        order: tasks[b].order,
-      });
-      console.log("updated task above");
-      await updateDoc(doc(tasksCollectionRef, tasks[b].id), {
-        order: tasks[a].order,
-      });
-      console.log("updated task below");
+      await Promise.all([
+        updateDoc(doc(tasksCollectionRef, tasks[a].id), {
+          order: tasks[b].order,
+        }),
+        updateDoc(doc(tasksCollectionRef, tasks[b].id), {
+          order: tasks[a].order,
+        })
+      ])
+      console.log("updated task orders");
     } catch (e) {
       console.error(e);
     }
