@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
-// TODO: update functions to update backend (TAKE NOTE OF ORDER), add assignee for tasks
+// TODO: add assignee for tasks
 
 interface Props {
   tripId: string;
