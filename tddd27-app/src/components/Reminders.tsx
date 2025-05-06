@@ -2,30 +2,35 @@ import React, { useState } from "react";
 import "./Reminders.css";
 import Card from "./Card";
 
-function Reminders() {
-  const [reminders, setReminders] = useState([
-    "dummy reminder",
-    "dummy reminder with a very long text blabla very longggg",
-    "dr",
-  ]);
+interface Props {
+  content: string[];
+  onUpdate: (newReminders: string[]) => Promise<boolean>;
+}
+
+function Reminders({ content, onUpdate }: Props) {
+  const [reminders, setReminders] = useState<string[]>(content);
   const [newReminder, setNewReminder] = useState("");
 
-  function deleteReminder(idx: number) {
-    let updated = [...reminders]
-    updated.splice(idx, 1)
-    setReminders(updated)
+  async function deleteReminder(idx: number) {
+    let updated = [...reminders];
+    updated.splice(idx, 1);
+    const success = await onUpdate(updated);
+    if (success) setReminders(updated);
   }
 
-  function addReminder() {
-    if (newReminder === "") {return}
-    let updated = [...reminders, newReminder]
-    setReminders(updated)
-    setNewReminder("")
+  async function addReminder() {
+    if (newReminder === "") {
+      return;
+    }
+    let updated = [...reminders, newReminder];
+    const success = await onUpdate(updated);
+    if (success) setReminders(updated);
+    setNewReminder("");
   }
 
   function addReminderOnEnter(e: React.KeyboardEvent) {
     if (e.key === "Enter" && newReminder != "") {
-        addReminder()
+      addReminder();
     }
   }
 
@@ -42,9 +47,7 @@ function Reminders() {
           <ul>
             {reminders.map((reminder, idx) => (
               <li key={idx}>
-                <span className={'reminder-text'}>
-                  {reminder}
-                </span>
+                <span className={"reminder-text"}>{reminder}</span>
                 <button
                   className="delete-reminder-btn"
                   onClick={() => deleteReminder(idx)}

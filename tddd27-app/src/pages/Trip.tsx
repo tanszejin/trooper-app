@@ -7,7 +7,7 @@ import Reminders from "../components/Reminders";
 import Chat from "../components/Chat";
 import Itinerary from "../components/Itinerary";
 import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 
@@ -36,6 +36,20 @@ function Trip() {
     }
   }
 
+  async function handleRemindersUpdate(newReminders: string[]) {
+    console.log("updating reminders")
+    try {
+      await updateDoc(doc(db, "trips", tripId!), {
+        reminders: newReminders
+      })
+      console.log("updated reminders")
+      return true;
+    } catch (e) {
+      console.error(e)
+      return false
+    }
+  }
+
   if (trip) return (
     <>
       <NavBar navbarColor="navbar--blue" />
@@ -55,7 +69,7 @@ function Trip() {
         </div>
         <div className="trip-cards-container">
           <Tasks tripId={tripId!}></Tasks>
-          <Reminders></Reminders>
+          <Reminders content={trip.reminders} onUpdate={(newReminders: string[]) => handleRemindersUpdate(newReminders)}></Reminders>
         </div>
         <div className="trip-cards-container">
           <Chat></Chat>
