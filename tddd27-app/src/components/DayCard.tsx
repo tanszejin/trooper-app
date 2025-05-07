@@ -1,78 +1,131 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DayCard.css";
 import Card from "./Card";
 import DayEvent from "./DayEvent";
 import Button from "./Button";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
-
-type Event = {
-  id: string;
-  name: string;
-  description: string;
-  time: string;
-  location: string;
-  members: string;
-};
-
-type Day = {
-  date: string;
-  events: Event[];
-};
+import {
+  addDoc,
+  collection,
+  CollectionReference,
+  deleteDoc,
+  doc,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  QuerySnapshot,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 
 interface Props {
-  day: Day;
+  day: any;
+  daysCollectionRef: CollectionReference;
 }
 
-function Day({ day }: Props) {
-  // change so that it gets day info directly from backend, receives id to find data in props
-  // or propagate the information from itinerary?
+function Day({ day, daysCollectionRef }: Props) {
+  const [events, setEvents] = useState<any[]>([]);
+  const eventsCollectionRef = collection(daysCollectionRef, day.id, "events");
 
-  const [events, setEvents] = useState(day.events);
+  useEffect(() => {
+    if (!day || !daysCollectionRef) {
+      console.error("no day or days collection provided");
+      return;
+    }
+    getEvents();
 
-  function addNewEvent() {
-    // change to backend function
-    let newEvent = {
-        id: crypto.randomUUID(),
-        name: "",
-        description: "",
-        time: "",
-        location: "",
-        members: ""
-    };
-    let updated = [...events, newEvent];
-    setEvents(updated);
+    const q = query(eventsCollectionRef, orderBy("time", "asc"));
+    const unsubscribe = onSnapshot(q, setEventsFromSnapshot);
+    return unsubscribe;
+  }, []);
+
+  async function getEvents() {
+    console.log("setEvents function");
+    try {
+      const q = query(eventsCollectionRef, orderBy("time", "asc"));
+      const snapshot = await getDocs(q);
+      setEventsFromSnapshot(snapshot);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
-  function deleteEvent(idx: number) {
-    console.log("delete event", idx);
-    let updated = [...events];
-    updated.splice(idx, 1);
-    setEvents(updated);
+  function setEventsFromSnapshot(snapshot: QuerySnapshot) {
+    console.log("setEventsFromSnapshot function");
+    const data = snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setEvents(data);
+  }
+
+  async function addNewEvent() {
+    console.log("adding new event");
+    let newEvent = {
+      name: "",
+      description: "",
+      time: serverTimestamp(),
+      location: "",
+      members: [],
+    };
+    try {
+      await addDoc(eventsCollectionRef, newEvent);
+      console.log("new event added");
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function deleteEvent(id: string) {
+    console.log("deleting event");
+    try {
+      await deleteDoc(doc(eventsCollectionRef, id));
+      console.log("event deleted");
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function swapTimes(a: number, b: number) {
+    try {
+      await Promise.all([
+        updateDoc(doc(eventsCollectionRef, events[a].id), {
+          time: events[b].time,
+        }),
+        updateDoc(doc(eventsCollectionRef, events[b].id), {
+          time: events[a].time,
+        }),
+      ]);
+      console.log("updated event times");
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   function moveEventUp(idx: number) {
     if (idx === 0) {
       return;
     }
-    let updated = [...events];
-    updated.splice(idx - 1, 2, events[idx], events[idx - 1]);
-    setEvents(updated);
+    swapTimes(idx - 1, idx);
   }
 
   function moveEventDown(idx: number) {
     if (idx === events.length - 1) {
       return;
     }
-    let updated = [...events];
-    updated.splice(idx, 2, events[idx + 1], events[idx]);
-    setEvents(updated);
+    swapTimes(idx, idx + 1);
   }
 
-  function updateEvent(idx: number, updatedPart: Partial<Event>) {
+  async function updateEvent(id: string, updatedPart: Partial<any>) {
     // updatedPart can be an object with some (or all) of the fields of Event
-    const newEvents = [...events];
-    newEvents[idx] = { ...newEvents[idx], ...updatedPart };
-    setEvents(newEvents);
+    console.log("updating event")
+    try {
+      await updateDoc(doc(eventsCollectionRef, id), updatedPart)
+      console.log("updated event")
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   return (
@@ -84,12 +137,12 @@ function Day({ day }: Props) {
             <li key={evnt.id}>
               <DayEvent
                 event={evnt}
-                onChange={(updatedPart) => updateEvent(idx, updatedPart)}
+                onChange={(updatedPart) => updateEvent(evnt.id, updatedPart)}
               ></DayEvent>
               <div className="btn-container">
                 <button
                   className="delete-event-btn"
-                  onClick={() => deleteEvent(idx)}
+                  onClick={() => deleteEvent(evnt.id)}
                 >
                   <span>✚</span>
                 </button>

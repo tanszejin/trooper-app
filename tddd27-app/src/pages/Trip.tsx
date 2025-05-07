@@ -70,7 +70,7 @@ function Trip() {
           >
             <img className="trip-image" src={trip.image_url} alt="image" />
           </Card>
-          <Itinerary></Itinerary>
+          <Itinerary tripId={tripId!}></Itinerary>
         </div>
         <div className="trip-cards-container">
           <Tasks tripId={tripId!}></Tasks>

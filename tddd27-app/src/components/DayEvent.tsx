@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import "./DayEvent.css";
 import { FaClock, FaMapMarkerAlt, FaUser } from "react-icons/fa";
-
-type Event = {
-  name: string;
-  description: string;
-  time: string;
-  location: string;
-  members: string;
-};
+import { format } from "date-fns";
 
 interface Props {
-  event: Event;
-  onChange: (updatedPart: Partial<Event>) => void;
+  event: any;
+  onChange: (updatedPart: Partial<any>) => void;
 }
 
 function DayEvent({ event, onChange }: Props) {
   // TODO: fix the textareas, dont allow multiple lines etc
+
+  const date = format(event.time.toDate(), "yyyy-mm-dd")
 
   return (
     <div className="event-container">
@@ -45,8 +40,8 @@ function DayEvent({ event, onChange }: Props) {
             className="text"
             rows={1}
             placeholder="time..."
-            value={event.time}
-            onChange={(e) => onChange({time: e.target.value})}
+            value={format(event.time.toDate(), "h.mm a")}
+            onChange={(e) => onChange({time: new Date(`${date} ${e.target.value}`)})}
           />
         </div>
         <div className="information-container">
