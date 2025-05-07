@@ -3,13 +3,25 @@ import "./Chat.css";
 import Card from "./Card";
 import Button from "./Button";
 import { auth, db } from "../firebase/firebase";
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, QuerySnapshot, serverTimestamp, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  QuerySnapshot,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 
 interface Props {
-  tripId: string   // change reminders to do this too for real-time syncing
+  tripId: string; // change reminders to do this too for real-time syncing
 }
 
-function Chat({tripId}: Props) {
+function Chat({ tripId }: Props) {
   // this is still the user object
   const currentUser = auth.currentUser!;
   const [messages, setMessages] = useState<any[]>([]);
@@ -18,20 +30,20 @@ function Chat({tripId}: Props) {
 
   useEffect(() => {
     if (!tripId) {
-      console.error("no trip id provided")
+      console.error("no trip id provided");
     }
     getChatMessages();
 
     // add listener for real-time updates
-    const q = query(chatCollectionRef, orderBy("sent_at", "asc"))
+    const q = query(chatCollectionRef, orderBy("sent_at", "asc"));
     const unsubscribe = onSnapshot(q, setChatMessagesFromSnapshot);
     return unsubscribe;
-  }, [])
+  }, []);
 
   async function getChatMessages() {
-    console.log("getChatMEssages function")
+    console.log("getChatMEssages function");
     try {
-      const q = query(chatCollectionRef, orderBy("sent_at", "asc"))
+      const q = query(chatCollectionRef, orderBy("sent_at", "asc"));
       const snapshot = await getDocs(q);
       setChatMessagesFromSnapshot(snapshot);
     } catch (e) {
@@ -40,27 +52,26 @@ function Chat({tripId}: Props) {
   }
 
   function setChatMessagesFromSnapshot(snapshot: QuerySnapshot) {
-    console.log("getChatMessagesFromSnapshot function")
+    console.log("getChatMessagesFromSnapshot function");
     const chatData = snapshot.docs.map((doc) => ({
       ...doc.data(),
-      id: doc.id
+      id: doc.id,
     }));
     setMessages(chatData);
   }
 
   async function getUserFirstname() {
     // ideally should maintain a current user object with the names?
-    console.log("getUserFirstname function")
+    console.log("getUserFirstname function");
     try {
-      const snapshot = await getDoc(doc(db, "users", currentUser.uid))
+      const snapshot = await getDoc(doc(db, "users", currentUser.uid));
       if (snapshot.exists()) {
-        console.log("user first name: ", snapshot.data().first_name)
-        return snapshot.data().first_name
-      }
-      else throw new Error("user not found")
+        console.log("user first name: ", snapshot.data().first_name);
+        return snapshot.data().first_name;
+      } else throw new Error("user not found");
     } catch (e) {
-      console.error(e)
-      return "undefined user"
+      console.error(e);
+      return "undefined user";
     }
   }
 
@@ -68,16 +79,16 @@ function Chat({tripId}: Props) {
     if (newMessageContent === "") {
       return;
     }
-    console.log("sending new message")
+    console.log("sending new message");
     const newMessage = {
       content: newMessageContent,
       sender_uid: currentUser.uid,
       sender_firstname: await getUserFirstname(),
       sent_at: serverTimestamp(),
-    }
-    try {      
+    };
+    try {
       await addDoc(chatCollectionRef, newMessage);
-      console.log("message sent")
+      console.log("message sent");
       setNewMessageContent("");
       // changes to chat collection should be automatically updated cus of the listener
     } catch (e) {
@@ -105,7 +116,9 @@ function Chat({tripId}: Props) {
                 }`}
               >
                 {message.sender_uid != currentUser.uid && (
-                  <span className="message-sender-text">{message.sender_firstname}</span>
+                  <span className="message-sender-text">
+                    {message.sender_firstname}
+                  </span>
                 )}
                 <span className="message-text">{message.content}</span>
               </li>
