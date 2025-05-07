@@ -6,6 +6,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase/firebase";
 import CardDeck from "../components/CardDeck";
 import {
+  addDoc,
   collection,
   getDoc,
   getDocs,
@@ -13,6 +14,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import Button from "../components/Button";
 
 // TODO: babckend, clicking card, add new trip
 
@@ -22,21 +24,25 @@ function Home() {
   const currentUser = auth.currentUser;
 
   const [showNavBar, setShowNavBar] = useState(true);
+  const [addingNewTrip, setAddingNewTrip] = useState(false);
+  const [newTripName, setNewTripName] = useState("");
 
-  const [trips, setTrips] = useState<any>([]);
+  const [trips, setTrips] = useState<any[]>([]);
 
   useEffect(() => {
+    if (!currentUser) return;
     getUserTrips();
   }, []);
 
-  // EDITING
   async function getUserTrips() {
     try {
       const qTripId = query(
         collection(db, "trip-users"),
-        where("user_id", "==", currentUser?.uid)
+        where("user_id", "==", currentUser!.uid)
       );
       const snapshot = await getDocs(qTripId);
+      if (snapshot.empty) return;
+
       const tripIds = snapshot.docs.map((doc) => doc.data().trip_id);
       console.log("trip_ids: ", tripIds);
 
@@ -87,6 +93,23 @@ function Home() {
     navigate("/trip/" + tripId);
   }
 
+  async function addTrip() {
+    console.log("adding new trip");
+    const newTrip = {
+      created_by: currentUser!.uid,
+      image_url: "/images/example_2.jpg",
+      trip_name: newTripName,
+    };
+    try {
+      const tripsCollectionRef = collection(db, "trips");
+      const tripRef = await addDoc(tripsCollectionRef, newTrip);
+      console.log("new trip added");
+      navigate("/trip/" + tripRef.id);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   return (
     <>
       {!userLoggedIn && <Navigate to={"/hero"} replace={true} />}
@@ -99,7 +122,42 @@ function Home() {
             onClick={(idx: number) => handleCardDeckClick(idx)}
           ></CardDeck>
         </div>
+        <Button
+          buttonColor="btn--clear"
+          buttonStyle="btn--morepress"
+          buttonSize="btn--large"
+          onClick={() => setAddingNewTrip(true)}
+        >
+          Add a new trip
+        </Button>
       </div>
+      {addingNewTrip && (
+        <>
+          <div
+            className="backdrop"
+            onClick={() => setAddingNewTrip(false)}
+          ></div>
+          <div className="set-tripname-container">
+            <input
+              className="set-tripname-input"
+              type="text"
+              placeholder="Enter your trip name..."
+              value={newTripName}
+              onChange={(e) => setNewTripName(e.target.value)}
+            />
+            <div className="add-btn-container">
+              <Button
+                buttonColor="btn--blue"
+                buttonStyle="btn--mediumpress"
+                buttonSize="btn--medium"
+                onClick={addTrip}
+              >
+                Add
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }
