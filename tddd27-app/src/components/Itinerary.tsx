@@ -78,7 +78,7 @@ function Itinerary({ tripId }: Props) {
       // TODO: ui for editing date
       const theNextDay =
         days.length === 0
-          ? serverTimestamp()
+          ? new Date("2025-10-05")
           : new Date(
               days[days.length - 1].date.toDate().getTime() +
                 24 * 60 * 60 * 1000

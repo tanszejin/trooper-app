@@ -11,11 +11,16 @@ interface Props {
 function DayEvent({ event, onChange }: Props) {
   // TODO: fix the textareas, dont allow multiple lines etc
   const date = format(event.time.toDate(), "yyyy-MM-dd");
-  const [name, setName] = useState(event.name);
-  const [description, setDescription] = useState(event.description);
-  const [time, setTime] = useState(format(event.time.toDate(), "h.mm a"));
-  const [location, setLocation] = useState(event.location);
-  const [members, setMembers] = useState(event.members);
+  // const [name, setName] = useState(event.name);
+  // const [description, setDescription] = useState(event.description);
+  // const [time, setTime] = useState(format(event.time.toDate(), "h.mm a"));
+  // const [location, setLocation] = useState(event.location);
+  // const [members, setMembers] = useState(event.members);
+  let name = event.name
+  let description = event.description
+  let time = format(event.time.toDate(), "h.mm a")
+  let location = event.location
+  let members = event.members
 
   function parseTime(str: string) {
     // TODO: more input handling
@@ -29,7 +34,7 @@ function DayEvent({ event, onChange }: Props) {
           className="event-name"
           value={name}
           placeholder="event name..."
-          onChange={(e) => {setName(e.target.value)}}
+          onChange={(e) => {name = (e.target.value)}}
           onBlur={(e) => onChange({ name: e.target.value })} // update database too
           rows={2}
           maxLength={44}
@@ -38,7 +43,7 @@ function DayEvent({ event, onChange }: Props) {
           className="event-description"
           value={description}
           placeholder="enter any descriptions or notes..."
-          onChange={(e) => {setDescription(e.target.value)}}
+          onChange={(e) => {description = (e.target.value)}}
           onBlur={(e) => onChange({ description: e.target.value })}
           rows={4}
           maxLength={400}
@@ -52,7 +57,7 @@ function DayEvent({ event, onChange }: Props) {
             rows={1}
             placeholder="time..."
             value={time}
-            onChange={(e) => {setTime(e.target.value)}}
+            onChange={(e) => {time = (e.target.value)}}
             onBlur={(e) =>
               onChange({ time: parseTime(e.target.value) })
             }
@@ -65,7 +70,7 @@ function DayEvent({ event, onChange }: Props) {
             rows={1}
             placeholder="location..."
             value={location}
-            onChange={(e) => {setLocation(e.target.value)}}
+            onChange={(e) => {location = (e.target.value)}}
             onBlur={(e) => onChange({ location: e.target.value })}
           />
         </div>
@@ -76,7 +81,7 @@ function DayEvent({ event, onChange }: Props) {
             rows={1}
             placeholder="members..."
             value={members.join(", ")}
-            onChange={(e) => {setMembers(e.target.value.split(", "))}}
+            onChange={(e) => {members = (e.target.value.split(", "))}}
             onBlur={(e) => onChange({ members: e.target.value.split(", ") })}
           />
         </div>
