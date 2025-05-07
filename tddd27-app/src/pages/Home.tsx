@@ -101,9 +101,14 @@ function Home() {
       trip_name: newTripName,
     };
     try {
-      const tripsCollectionRef = collection(db, "trips");
-      const tripRef = await addDoc(tripsCollectionRef, newTrip);
+      const tripRef = await addDoc(collection(db, "trips"), newTrip);
       console.log("new trip added");
+      const newTripUser = {
+        trip_id: tripRef.id,
+        user_id: currentUser!.uid,
+      };
+      await addDoc(collection(db, "trip-users"), newTripUser);
+      setAddingNewTrip(false);
       navigate("/trip/" + tripRef.id);
     } catch (e) {
       console.error(e);
@@ -118,18 +123,20 @@ function Home() {
         <h1>Welcome, {currentUser != null ? currentUser.email : ""}</h1>
         <div className="carddeck-container">
           <CardDeck
-            contents={trips}
+            content={trips}
             onClick={(idx: number) => handleCardDeckClick(idx)}
           ></CardDeck>
         </div>
-        <Button
-          buttonColor="btn--clear"
-          buttonStyle="btn--morepress"
-          buttonSize="btn--large"
-          onClick={() => setAddingNewTrip(true)}
-        >
-          Add a new trip
-        </Button>
+        <div className="add-new-trip-button">
+          <Button
+            buttonColor="btn--clear"
+            buttonStyle="btn--morepress"
+            buttonSize="btn--large"
+            onClick={() => setAddingNewTrip(true)}
+          >
+            Add a new trip
+          </Button>
+        </div>
       </div>
       {addingNewTrip && (
         <>
