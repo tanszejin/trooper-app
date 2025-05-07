@@ -18,13 +18,14 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
+import { format } from "date-fns";
 
 interface Props {
   day: any;
   daysCollectionRef: CollectionReference;
 }
 
-function Day({ day, daysCollectionRef }: Props) {
+function DayCard({ day, daysCollectionRef }: Props) {
   const [events, setEvents] = useState<any[]>([]);
   const eventsCollectionRef = collection(daysCollectionRef, day.id, "events");
 
@@ -65,7 +66,7 @@ function Day({ day, daysCollectionRef }: Props) {
     let newEvent = {
       name: "",
       description: "",
-      time: serverTimestamp(),
+      time: new Date(day.date.toDate().getTime() + (24 * 60 - 1) * 60 * 1000),
       location: "",
       members: [],
     };
@@ -119,10 +120,10 @@ function Day({ day, daysCollectionRef }: Props) {
 
   async function updateEvent(id: string, updatedPart: Partial<any>) {
     // updatedPart can be an object with some (or all) of the fields of Event
-    console.log("updating event")
+    console.log("updating event");
     try {
-      await updateDoc(doc(eventsCollectionRef, id), updatedPart)
-      console.log("updated event")
+      await updateDoc(doc(eventsCollectionRef, id), updatedPart);
+      console.log("updated event");
     } catch (e) {
       console.error(e);
     }
@@ -131,7 +132,7 @@ function Day({ day, daysCollectionRef }: Props) {
   return (
     <>
       <Card className="day-card" height={"100%"} width={"100%"} margin={0}>
-        <h4>{day.date}</h4>
+        <h4>{format(day.date.toDate(), "dd MMM yyyy")}</h4>
         <ul>
           {events.map((evnt, idx) => (
             <li key={evnt.id}>
@@ -183,4 +184,4 @@ function Day({ day, daysCollectionRef }: Props) {
   );
 }
 
-export default Day;
+export default DayCard;

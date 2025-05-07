@@ -4,8 +4,10 @@ import {
   collection,
   CollectionReference,
   getDocs,
+  onSnapshot,
   orderBy,
   query,
+  QuerySnapshot,
 } from "firebase/firestore";
 import { format } from "date-fns";
 
@@ -29,20 +31,30 @@ function ItineraryDay({ day, daysCollectionRef }: Props) {
       return;
     }
     getEvents();
+
+    const q = query(eventsCollectionRef, orderBy("time", "asc"));
+    const unsubscribe = onSnapshot(q, setEventsFromSnapshot);
+    return unsubscribe;
   }, []);
 
   async function getEvents() {
+    console.log("setEvents function");
     try {
       const q = query(eventsCollectionRef, orderBy("time", "asc"));
       const snapshot = await getDocs(q);
-      const data = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setEvents(data);
+      setEventsFromSnapshot(snapshot);
     } catch (e) {
       console.error(e);
     }
+  }
+
+  function setEventsFromSnapshot(snapshot: QuerySnapshot) {
+    console.log("setEventsFromSnapshot function");
+    const data = snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setEvents(data);
   }
 
   return (
@@ -51,9 +63,9 @@ function ItineraryDay({ day, daysCollectionRef }: Props) {
       <ul>
         {events.map((event) => (
           <li key={event.id}>
-            <p className="event-name">{event.name}</p>
+            <p className="event-name">{event.name ?? ""}</p>
             <p className="event-time">
-              {format(event.time.toDate(), "h.mm a")}
+              {event.time ? format(event.time.toDate(), "h.mm a") : ""}
             </p>
           </li>
         ))}

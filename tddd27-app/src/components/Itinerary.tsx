@@ -90,7 +90,7 @@ function Itinerary({ tripId }: Props) {
       const newEmptyEvent = {
         name: "new event",
         description: "",
-        time: serverTimestamp(),
+        time: theNextDay,
         location: "",
         members: [],
       };
