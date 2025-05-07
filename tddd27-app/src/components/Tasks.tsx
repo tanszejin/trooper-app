@@ -7,6 +7,9 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  orderBy,
+  query,
+  QuerySnapshot,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
@@ -20,34 +23,35 @@ interface Props {
 function Tasks({ tripId }: Props) {
   const [tasks, setTasks] = useState<any[]>([]);
   const [newTaskContent, setNewTaskContent] = useState("");
-  // const [checked, setChecked] = useState<boolean[]>([]);
   const tasksCollectionRef = collection(db, "trips", tripId, "tasks");
 
   useEffect(() => {
+    if (!tripId) {
+      console.error("no tripId provided")
+      return;
+    }
     getTasks();
   }, []);
 
   async function getTasks() {
     console.log("getTasks function");
     try {
-      const snapshot = await getDocs(tasksCollectionRef);
+      const q = query(tasksCollectionRef, orderBy("order", "asc"))
+      const snapshot = await getDocs(q);
       console.log("tasks snapshot obtained");
-      const data = snapshot.docs.map((doc) => ({
-        assigned_to: doc.data().assigned_to,
-        checked: doc.data().checked,
-        content: doc.data().content,
-        order: doc.data().order,
-        id: doc.id,
-      }));
-      // order the tasks
-      data.sort((a, b) => {
-        return a.order - b.order;
-      });
-
-      setTasks(data);
+      setTasksFromSnapshot(snapshot);
     } catch (e) {
       console.error(e);
     }
+  }
+  
+  function setTasksFromSnapshot(snapshot: QuerySnapshot) {
+    console.log("setTasksFromSnapshot function")
+    const data = snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setTasks(data);
   }
 
   async function addTask() {
@@ -64,7 +68,8 @@ function Tasks({ tripId }: Props) {
     try {
       await addDoc(tasksCollectionRef, newTask);
       console.log("new task added: ", newTask);
-      await getTasks();
+      // await getTasks();
+      getTasks();
     } catch (e) {
       console.error(e);
     }
@@ -166,7 +171,7 @@ function Tasks({ tripId }: Props) {
         <div className="task-list-container">
           <ol>
             {tasks.map((task, idx) => (
-              <li key={idx}>
+              <li key={task.id}>
                 <div className="custom-checkbox-container">
                   <input
                     className="task-checkbox"

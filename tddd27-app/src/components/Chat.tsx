@@ -31,6 +31,7 @@ function Chat({ tripId }: Props) {
   useEffect(() => {
     if (!tripId) {
       console.error("no trip id provided");
+      return;
     }
     getChatMessages();
 
