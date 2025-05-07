@@ -7,6 +7,7 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  onSnapshot,
   orderBy,
   query,
   QuerySnapshot,
@@ -27,16 +28,21 @@ function Tasks({ tripId }: Props) {
 
   useEffect(() => {
     if (!tripId) {
-      console.error("no tripId provided")
+      console.error("no tripId provided");
       return;
     }
     getTasks();
+
+    // listener for real-time updates
+    const q = query(tasksCollectionRef, orderBy("order", "asc"));
+    const unsubscribe = onSnapshot(q, setTasksFromSnapshot);
+    return unsubscribe;
   }, []);
 
   async function getTasks() {
     console.log("getTasks function");
     try {
-      const q = query(tasksCollectionRef, orderBy("order", "asc"))
+      const q = query(tasksCollectionRef, orderBy("order", "asc"));
       const snapshot = await getDocs(q);
       console.log("tasks snapshot obtained");
       setTasksFromSnapshot(snapshot);
@@ -44,9 +50,9 @@ function Tasks({ tripId }: Props) {
       console.error(e);
     }
   }
-  
+
   function setTasksFromSnapshot(snapshot: QuerySnapshot) {
-    console.log("setTasksFromSnapshot function")
+    console.log("setTasksFromSnapshot function");
     const data = snapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
@@ -68,8 +74,6 @@ function Tasks({ tripId }: Props) {
     try {
       await addDoc(tasksCollectionRef, newTask);
       console.log("new task added: ", newTask);
-      // await getTasks();
-      getTasks();
     } catch (e) {
       console.error(e);
     }
@@ -87,10 +91,6 @@ function Tasks({ tripId }: Props) {
     try {
       await deleteDoc(doc(tasksCollectionRef, tasks[idx].id));
       console.log("task deleted");
-      // update tasks array locally
-      let updatedTasks = [...tasks];
-      updatedTasks.splice(idx, 1);
-      setTasks(updatedTasks);
     } catch (e) {
       console.error(e);
     }
@@ -104,8 +104,8 @@ function Tasks({ tripId }: Props) {
         }),
         updateDoc(doc(tasksCollectionRef, tasks[b].id), {
           order: tasks[a].order,
-        })
-      ])
+        }),
+      ]);
       console.log("updated task orders");
     } catch (e) {
       console.error(e);
@@ -118,15 +118,6 @@ function Tasks({ tripId }: Props) {
     }
     console.log("moving task up");
     await swapOrder(idx - 1, idx);
-    // query firestore to update tasks
-    await getTasks();
-
-    // let updatedTasks = [...tasks];
-    // const temp = updatedTasks[idx].order;
-    // updatedTasks[idx].order = updatedTasks[idx - 1].order;
-    // updatedTasks[idx - 1].order = temp;
-    // updatedTasks.splice(idx - 1, 2, tasks[idx], tasks[idx - 1]);
-    // setTasks(updatedTasks);
   }
 
   async function moveTaskDown(idx: number) {
@@ -135,14 +126,6 @@ function Tasks({ tripId }: Props) {
     }
     console.log("moving task down");
     await swapOrder(idx, idx + 1);
-    await getTasks();
-
-    // let updatedTasks = [...tasks];
-    // updatedTasks.splice(idx, 2, tasks[idx + 1], tasks[idx]);
-    // setTasks(updatedTasks);
-    // let updatedChecked = [...checked];
-    // updatedChecked.splice(idx, 2, checked[idx + 1], checked[idx]);
-    // setChecked(updatedChecked);
   }
 
   async function handleCheckbox(idx: number, isChecked: boolean) {
@@ -151,9 +134,6 @@ function Tasks({ tripId }: Props) {
         checked: isChecked,
       });
       console.log("updated task, check: ", isChecked);
-      let updatedTasks = [...tasks];
-      updatedTasks[idx].checked = isChecked;
-      setTasks(updatedTasks);
     } catch (e) {
       console.error(e);
     }
