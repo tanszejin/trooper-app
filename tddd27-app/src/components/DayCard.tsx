@@ -148,7 +148,7 @@ function DayCard({ day, daysCollectionRef }: Props) {
                 >
                   <span>✚</span>
                 </button>
-                <button
+                {/* <button
                   className="move-event-btn"
                   onClick={() => moveEventUp(idx)}
                 >
@@ -163,7 +163,7 @@ function DayCard({ day, daysCollectionRef }: Props) {
                   <span>
                     <FaArrowDown className="icon" />
                   </span>
-                </button>
+                </button> */}
               </div>
             </li>
           ))}
