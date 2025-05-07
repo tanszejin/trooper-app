@@ -6,26 +6,30 @@ import Tasks from "../components/Tasks";
 import Reminders from "../components/Reminders";
 import Chat from "../components/Chat";
 import Itinerary from "../components/Itinerary";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 
+// TODO: add trip members function
+
 function Trip() {
+  const navigate = useNavigate();
   const { tripId } = useParams();
   const [trip, setTrip] = useState<any>(null);
 
   useEffect(() => {
+    if (!tripId) {
+      console.error("no trip id in url")
+      navigate("/home")
+    }
     console.log("showing trip: ", tripId);
     getTripData();
   }, []);
 
   async function getTripData() {
-    try {
-      if (!tripId) {
-        throw new Error("no trip id in url");
-      }
-      const snapshot = await getDoc(doc(db, "trips", tripId));
+    try {      
+      const snapshot = await getDoc(doc(db, "trips", tripId!));
       if (!snapshot.exists()) {
         throw new Error("trip does not exist");
       }
@@ -33,6 +37,7 @@ function Trip() {
     } catch (e) {
       console.error(e);
       setTrip(null);
+      navigate("/home")
     }
   }
 
@@ -72,7 +77,7 @@ function Trip() {
           <Reminders content={trip.reminders} onUpdate={(newReminders: string[]) => handleRemindersUpdate(newReminders)}></Reminders>
         </div>
         <div className="trip-cards-container">
-          <Chat></Chat>
+          <Chat tripId={tripId!}></Chat>
           <Card className="trip-smaller-card" width="32%" margin="0">
             <h5 className="trip-card-name">Polls</h5>
           </Card>
