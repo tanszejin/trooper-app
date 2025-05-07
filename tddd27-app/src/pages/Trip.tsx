@@ -74,7 +74,7 @@ function Trip() {
         </div>
         <div className="trip-cards-container">
           <Tasks tripId={tripId!}></Tasks>
-          <Reminders content={trip.reminders} onUpdate={(newReminders: string[]) => handleRemindersUpdate(newReminders)}></Reminders>
+          <Reminders tripId={tripId!}></Reminders>
         </div>
         <div className="trip-cards-container">
           <Chat tripId={tripId!}></Chat>
