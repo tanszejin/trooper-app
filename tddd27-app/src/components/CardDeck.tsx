@@ -2,23 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./CardDeck.css";
 import Card from "./Card";
 
-type content = {
-  trip_name: string;
-  image_url: string;
-};
-
 interface Props {
-  contents: content[];
+  content: any[];
   onClick: (idx: number) => void;
 }
 
-function CardDeck({ contents, onClick }: Props) {
+function CardDeck({ content, onClick }: Props) {
   const CARD_WIDTH = 400; //px
   const CARDDECK_SIZE_RATIO = 0.6;
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [offset, setOffset] = useState(
     (CARDDECK_SIZE_RATIO * window.innerWidth - CARD_WIDTH) /
-      (contents.length - 1)
+      (content.length - 1)
   );
 
   // handle window resizing, TODO: add this for all other responsive ui
@@ -27,7 +22,7 @@ function CardDeck({ contents, onClick }: Props) {
       const size = window.innerWidth < 800 ? 800 : window.innerWidth;
       setOffset(
         (CARDDECK_SIZE_RATIO * size - CARD_WIDTH) /
-          (contents.length<=1 ? 1 : contents.length - 1)
+          (content.length<=1 ? 1 : content.length - 1)
       );
     };
     window.addEventListener("resize", handleResize);
@@ -39,8 +34,9 @@ function CardDeck({ contents, onClick }: Props) {
 
   return (
     <div className="carddeck">
-      {contents.map((c, idx) => (
+      {content.map((c, idx) => (
         <div
+          key={c.id}
           className="carddeck-card-container"
           style={{
             zIndex: 900 - idx,
