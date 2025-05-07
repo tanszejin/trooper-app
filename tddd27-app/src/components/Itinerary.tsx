@@ -62,6 +62,7 @@ function Itinerary({ tripId }: Props) {
   }
 
   function setDaysFromSnapshot(snapshot: QuerySnapshot) {
+    if (snapshot.empty) return;
     console.log("setDaysFromSnapshot function");
     const data = snapshot.docs.map((doc) => ({
       ...doc.data(),

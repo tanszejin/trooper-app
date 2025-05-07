@@ -53,6 +53,7 @@ function DayCard({ day, daysCollectionRef }: Props) {
   }
 
   function setEventsFromSnapshot(snapshot: QuerySnapshot) {
+    if (snapshot.empty) return;
     console.log("setEventsFromSnapshot function");
     const data = snapshot.docs.map((doc) => ({
       ...doc.data(),

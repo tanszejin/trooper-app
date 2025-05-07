@@ -53,6 +53,7 @@ function Chat({ tripId }: Props) {
   }
 
   function setChatMessagesFromSnapshot(snapshot: QuerySnapshot) {
+    if (snapshot.empty) return;
     console.log("getChatMessagesFromSnapshot function");
     const chatData = snapshot.docs.map((doc) => ({
       ...doc.data(),

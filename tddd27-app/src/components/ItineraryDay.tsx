@@ -49,6 +49,7 @@ function ItineraryDay({ day, daysCollectionRef }: Props) {
   }
 
   function setEventsFromSnapshot(snapshot: QuerySnapshot) {
+    if (snapshot.empty) return;
     console.log("setEventsFromSnapshot function");
     const data = snapshot.docs.map((doc) => ({
       ...doc.data(),
@@ -59,7 +60,7 @@ function ItineraryDay({ day, daysCollectionRef }: Props) {
 
   return (
     <div className="itinerary-day-container">
-      <h6>{format(day.date.toDate(), "dd MMM yyyy")}</h6>
+      <h6>{day.date ? format(day.date.toDate(), "dd MMM yyyy") : ""}</h6>
       <ul>
         {events.map((event) => (
           <li key={event.id}>

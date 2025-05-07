@@ -52,6 +52,7 @@ function Tasks({ tripId }: Props) {
   }
 
   function setTasksFromSnapshot(snapshot: QuerySnapshot) {
+    if (snapshot.empty) return;
     console.log("setTasksFromSnapshot function");
     const data = snapshot.docs.map((doc) => ({
       ...doc.data(),
