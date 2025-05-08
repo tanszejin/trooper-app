@@ -4,6 +4,7 @@ import Card from "./Card";
 import {
   collection,
   getDocs,
+  onSnapshot,
   query,
   QuerySnapshot,
   where,
@@ -12,7 +13,7 @@ import { db } from "../firebase/firebase";
 
 interface Props {
   tripIds: string[];
-  onClick: (idx: number) => void;
+  onClick: (id: string) => void;
 }
 
 function CardDeck({ tripIds, onClick }: Props) {
@@ -24,7 +25,6 @@ function CardDeck({ tripIds, onClick }: Props) {
 
   // handle window resizing, TODO: add this for all other responsive ui
   useEffect(() => {
-    console.log(window.innerWidth, tripIds.length, offset);
     if (tripIds.length === 0) {
       return;
     }
@@ -32,7 +32,7 @@ function CardDeck({ tripIds, onClick }: Props) {
     getTrips();
 
     const handleResize = () => {
-      const size = window.innerWidth < 600 ? 600 : window.innerWidth;
+      const size = window.innerWidth < 700 ? 700 : window.innerWidth;
       setOffset(
         (CARDDECK_SIZE_RATIO * size - CARD_WIDTH) /
           (trips.length <= 1 ? 1 : trips.length - 1)
@@ -68,10 +68,6 @@ function CardDeck({ tripIds, onClick }: Props) {
     }));
     console.log("trips: ", data);
     setTrips(data);
-    setOffset(
-      (CARDDECK_SIZE_RATIO * window.innerWidth - CARD_WIDTH) /
-        (tripIds.length - 1)
-    );
   }
 
   return (
@@ -85,12 +81,12 @@ function CardDeck({ tripIds, onClick }: Props) {
             transform: `translateX(${
               (hoveredIndex && idx < hoveredIndex ? -170 : 0) +
               (hoveredIndex && idx >= hoveredIndex ? 120 : 0) +
-              offset * idx
+              60 * idx
             }px)`,
           }}
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
-          onClick={() => onClick(idx)}
+          onClick={() => onClick(c.id)}
         >
           <Card
             key={idx}

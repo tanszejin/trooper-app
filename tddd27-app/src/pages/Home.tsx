@@ -76,9 +76,8 @@ function Home() {
     // ]
   }
 
-  function handleCardDeckClick(idx: number) {
-    const tripId = tripIds[idx];
-    navigate("/trip/" + tripId);
+  function handleCardDeckClick(id: string) {
+    navigate("/trip/" + id);
   }
 
   async function addTrip() {
@@ -112,7 +111,7 @@ function Home() {
         {tripIds.length > 0 && <div className="carddeck-container">
           <CardDeck
             tripIds={tripIds}
-            onClick={(idx: number) => handleCardDeckClick(idx)}
+            onClick={(id: string) => handleCardDeckClick(id)}
           ></CardDeck>
         </div>}
         <div className="add-new-trip-button">
