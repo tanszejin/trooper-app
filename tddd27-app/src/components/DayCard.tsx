@@ -67,7 +67,7 @@ function DayCard({ day, daysCollectionRef }: Props) {
     let newEvent = {
       name: "",
       description: "",
-      time: new Date(day.date.toDate().getTime() + (24 * 60 - 1) * 60 * 1000),
+      time: new Date(day.date.toDate().getTime() + (23 * 60 ) * 60 * 1000),
       location: "",
       members: [],
     };
