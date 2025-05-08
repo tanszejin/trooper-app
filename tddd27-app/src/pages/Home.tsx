@@ -27,7 +27,7 @@ function Home() {
   const [addingNewTrip, setAddingNewTrip] = useState(false);
   const [newTripName, setNewTripName] = useState("");
 
-  const [trips, setTrips] = useState<any[]>([]);
+  const [tripIds, setTripIds] = useState<string[]>([]);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -43,21 +43,9 @@ function Home() {
       const snapshot = await getDocs(qTripId);
       if (snapshot.empty) return;
 
-      const tripIds = snapshot.docs.map((doc) => doc.data().trip_id);
-      console.log("trip_ids: ", tripIds);
-
-      const qTrips = query(
-        collection(db, "trips"),
-        where("__name__", "in", tripIds)
-      );
-      const snapsho = await getDocs(qTrips);
-      const tripData = snapsho.docs.map((doc) => ({
-        trip_name: doc.data().trip_name,
-        image_url: doc.data().image_url,
-        id: doc.id,
-      }));
-      console.log("trips: ", tripData);
-      setTrips(tripData);
+      const data = snapshot.docs.map((doc) => doc.data().trip_id);
+      console.log("trip_ids: ", data);
+      setTripIds(data)      
     } catch (e) {
       console.error(e);
     }
@@ -89,7 +77,7 @@ function Home() {
   }
 
   function handleCardDeckClick(idx: number) {
-    const tripId = trips[idx].id;
+    const tripId = tripIds[idx];
     navigate("/trip/" + tripId);
   }
 
@@ -121,12 +109,12 @@ function Home() {
       <div className="home-container">
         {showNavBar && <NavBar navbarColor="navbar--lightblue" />}
         <h1>Welcome, {currentUser != null ? currentUser.email : ""}</h1>
-        <div className="carddeck-container">
+        {tripIds.length > 0 && <div className="carddeck-container">
           <CardDeck
-            content={trips}
+            tripIds={tripIds}
             onClick={(idx: number) => handleCardDeckClick(idx)}
           ></CardDeck>
-        </div>
+        </div>}
         <div className="add-new-trip-button">
           <Button
             buttonColor="btn--clear"

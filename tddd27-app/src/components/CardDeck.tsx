@@ -1,28 +1,41 @@
 import React, { useEffect, useState } from "react";
 import "./CardDeck.css";
 import Card from "./Card";
+import {
+  collection,
+  getDocs,
+  query,
+  QuerySnapshot,
+  where,
+} from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 interface Props {
-  content: any[];
+  tripIds: string[];
   onClick: (idx: number) => void;
 }
 
-function CardDeck({ content, onClick }: Props) {
+function CardDeck({ tripIds, onClick }: Props) {
   const CARD_WIDTH = 400; //px
   const CARDDECK_SIZE_RATIO = 0.6;
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [offset, setOffset] = useState(
-    (CARDDECK_SIZE_RATIO * window.innerWidth - CARD_WIDTH) /
-      (content.length - 1)
-  );
+  const [trips, setTrips] = useState<any[]>([]);
+  const [offset, setOffset] = useState(0);
 
   // handle window resizing, TODO: add this for all other responsive ui
   useEffect(() => {
+    console.log(window.innerWidth, tripIds.length, offset);
+    if (tripIds.length === 0) {
+      return;
+    }
+
+    getTrips();
+
     const handleResize = () => {
-      const size = window.innerWidth < 800 ? 800 : window.innerWidth;
+      const size = window.innerWidth < 600 ? 600 : window.innerWidth;
       setOffset(
         (CARDDECK_SIZE_RATIO * size - CARD_WIDTH) /
-          (content.length<=1 ? 1 : content.length - 1)
+          (trips.length <= 1 ? 1 : trips.length - 1)
       );
     };
     window.addEventListener("resize", handleResize);
@@ -32,9 +45,38 @@ function CardDeck({ content, onClick }: Props) {
     };
   }, []);
 
+  async function getTrips() {
+    console.log("getting trips");
+    try {
+      const q = query(
+        collection(db, "trips"),
+        where("__name__", "in", tripIds)
+      );
+      const snapshot = await getDocs(q);
+      setTripsFromSnapshot(snapshot);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function setTripsFromSnapshot(snapshot: QuerySnapshot) {
+    console.log("setTripsFromSnapshot function");
+    const data = snapshot.docs.map((doc) => ({
+      trip_name: doc.data().trip_name,
+      image_url: doc.data().image_url,
+      id: doc.id,
+    }));
+    console.log("trips: ", data);
+    setTrips(data);
+    setOffset(
+      (CARDDECK_SIZE_RATIO * window.innerWidth - CARD_WIDTH) /
+        (tripIds.length - 1)
+    );
+  }
+
   return (
     <div className="carddeck">
-      {content.map((c, idx) => (
+      {trips.map((c, idx) => (
         <div
           key={c.id}
           className="carddeck-card-container"
