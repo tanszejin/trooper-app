@@ -15,7 +15,6 @@ import {
   orderBy,
   query,
   QuerySnapshot,
-  serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 import { format } from "date-fns";
@@ -26,6 +25,7 @@ interface Props {
 }
 
 function DayCard({ day, daysCollectionRef }: Props) {
+  const [date, setDate] = useState(format(day.date.toDate(), "dd MMM yyyy"));
   const [events, setEvents] = useState<any[]>([]);
   const eventsCollectionRef = collection(daysCollectionRef, day.id, "events");
 
@@ -67,7 +67,7 @@ function DayCard({ day, daysCollectionRef }: Props) {
     let newEvent = {
       name: "",
       description: "",
-      time: new Date(day.date.toDate().getTime() + (23 * 60 ) * 60 * 1000),
+      time: new Date(day.date.toDate().getTime() + 23 * 60 * 60 * 1000),
       location: "",
       members: [],
     };
@@ -119,6 +119,18 @@ function DayCard({ day, daysCollectionRef }: Props) {
     swapTimes(idx, idx + 1);
   }
 
+  async function updateDate() {
+    console.log("updating date");
+    try {
+      await updateDoc(doc(daysCollectionRef, day.id), {
+        date: date
+      })
+      console.log("updated date")
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   async function updateEvent(id: string, updatedPart: Partial<any>) {
     // updatedPart can be an object with some (or all) of the fields of Event
     console.log("updating event");
@@ -133,7 +145,14 @@ function DayCard({ day, daysCollectionRef }: Props) {
   return (
     <>
       <Card className="day-card" height={"100%"} width={"100%"} margin={0}>
-        <h4>{format(day.date.toDate(), "dd MMM yyyy")}</h4>
+        // make a custom datepicker??
+        <input
+          className="date-input"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          onBlur={updateDate}
+        />
         <ul>
           {events.map((evnt, idx) => (
             <li key={evnt.id}>

@@ -41,19 +41,18 @@
   transform: translate(-50%, -50%);
   width: 50%;
   min-width: 25rem;
-  height: 30%;
+  height: auto;
   margin: 0;
   z-index: 1001;
-  display: flex;
   justify-content: space-between;
   align-content: center;
   background-color: white;
-  padding: 5rem 2rem;
+  padding: 3rem 2rem;
   border-radius: 15px;
 }
 
 .set-tripname-input {
-  flex: 1;
+  width: 100%;
   background-color: aliceblue;
   border-radius: 10px;
   height: auto;
@@ -65,10 +64,38 @@
   border-top: 3px solid #bbb;
 }
 
+.set-date-datepicker {
+  margin-top: 1rem;
+  background-color: aliceblue;
+  border-radius: 10px;
+  height: auto;
+  padding: 0.5rem;
+  font-size: 1.0rem;
+  text-align: left;
+  border: none;
+  border-left: 2px solid #ddd;
+  border-top: 3px solid #bbb;
+}
+
+.set-date-datepicker-calendar {
+  .react-datepicker__week:nth-child(2n) {
+    background-color: white;
+  };
+  .react-datepicker__week:nth-child(2n+1) {
+    background-color: aliceblue;
+  };
+}
+
+.set-date-datepicker:focus {
+  outline: none;
+}
+
 .set-tripname-input:focus {
   outline: none;
 }
 
 .add-btn-container {
-  align-self: center;
+  margin: auto;
+  margin-top: 1.5rem;
+  width: 10rem;
 }

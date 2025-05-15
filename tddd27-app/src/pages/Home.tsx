@@ -5,6 +5,8 @@ import { useAuth } from "../contexts/authContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase/firebase";
 import CardDeck from "../components/CardDeck";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   addDoc,
   collection,
@@ -26,6 +28,7 @@ function Home() {
   const [showNavBar, setShowNavBar] = useState(true);
   const [addingNewTrip, setAddingNewTrip] = useState(false);
   const [newTripName, setNewTripName] = useState("");
+  const [newTripDate, setNewTripDate] = useState<Date | null>(new Date());
 
   const [tripIds, setTripIds] = useState<string[]>([]);
 
@@ -45,7 +48,7 @@ function Home() {
 
       const data = snapshot.docs.map((doc) => doc.data().trip_id);
       console.log("trip_ids: ", data);
-      setTripIds(data)      
+      setTripIds(data);
     } catch (e) {
       console.error(e);
     }
@@ -108,12 +111,14 @@ function Home() {
       <div className="home-container">
         {showNavBar && <NavBar navbarColor="navbar--lightblue" />}
         <h1>Welcome, {currentUser != null ? currentUser.email : ""}</h1>
-        {tripIds.length > 0 && <div className="carddeck-container">
-          <CardDeck
-            tripIds={tripIds}
-            onClick={(id: string) => handleCardDeckClick(id)}
-          ></CardDeck>
-        </div>}
+        {tripIds.length > 0 && (
+          <div className="carddeck-container">
+            <CardDeck
+              tripIds={tripIds}
+              onClick={(id: string) => handleCardDeckClick(id)}
+            ></CardDeck>
+          </div>
+        )}
         <div className="add-new-trip-button">
           <Button
             buttonColor="btn--clear"
@@ -138,6 +143,13 @@ function Home() {
               placeholder="Enter your trip name..."
               value={newTripName}
               onChange={(e) => setNewTripName(e.target.value)}
+            />
+            <DatePicker
+              className="set-date-datepicker"
+              calendarClassName="set-date-datepicker-calendar"
+              dateFormat={"dd/MM/yyyy"}
+              selected={newTripDate}
+              onChange={(e) => setNewTripDate(e)}
             />
             <div className="add-btn-container">
               <Button
