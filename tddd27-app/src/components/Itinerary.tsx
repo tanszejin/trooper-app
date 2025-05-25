@@ -48,9 +48,6 @@ function Itinerary({ tripId }: Props) {
   }, []);
 
   async function getDays() {
-    // TODO: update function
-    // gets the days in an itinerary, and the events and time for each day
-    // gets directly from backend
     console.log("getDays function");
     try {
       const q = query(daysCollectionRef, orderBy("date", "asc"));
@@ -124,7 +121,10 @@ function Itinerary({ tripId }: Props) {
         <ul className="itinerary-days-ul">
           {days.map((day, idx) => (
             <li key={day.id} onClick={() => setShowDayIdx(idx)}>
-              <ItineraryDay day={day} daysCollectionRef={daysCollectionRef}></ItineraryDay>
+              <ItineraryDay
+                day={day}
+                daysCollectionRef={daysCollectionRef}
+              ></ItineraryDay>
             </li>
           ))}
           <li key={-1}>
@@ -145,7 +145,10 @@ function Itinerary({ tripId }: Props) {
         <>
           <div className="backdrop" onClick={() => setShowDayIdx(-1)}></div>
           <div className="day-container">
-            <DayCard day={days[showDayIdx]} daysCollectionRef={daysCollectionRef}></DayCard>
+            <DayCard
+              day={days[showDayIdx]}
+              daysCollectionRef={daysCollectionRef}
+            ></DayCard>
           </div>
         </>
       )}
