@@ -7,7 +7,7 @@ import {
   updatePassword,
 } from "firebase/auth";
 import { auth, db } from "./firebase";
-import { addDoc, collection, doc, query, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 // TODO: input validation
 
