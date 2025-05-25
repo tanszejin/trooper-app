@@ -85,11 +85,16 @@ function Home() {
     try {
       const tripRef = await addDoc(collection(db, "trips"), newTrip);
       console.log("new trip added");
+      const newDay = {
+        date: newTripDate,
+      };
+      await addDoc(collection(tripRef, "days"), newDay);
+      console.log("first day added");
       const newTripUser = {
         trip_id: tripRef.id,
         user_id: currentUser!.uid,
       };
-      await addDoc(collection(db, "trip-users"), newTripUser);
+      addDoc(collection(db, "trip-users"), newTripUser);
       setAddingNewTrip(false);
       navigate("/trip/" + tripRef.id);
     } catch (e) {
@@ -128,21 +133,27 @@ function Home() {
             className="backdrop"
             onClick={() => setAddingNewTrip(false)}
           ></div>
-          <div className="set-tripname-container">
-            <input
-              className="set-tripname-input"
-              type="text"
-              placeholder="Enter your trip name..."
-              value={newTripName}
-              onChange={(e) => setNewTripName(e.target.value)}
-            />
-            <DatePicker
-              className="set-date-datepicker"
-              calendarClassName="set-date-datepicker-calendar"
-              dateFormat={"dd/MM/yyyy"}
-              selected={newTripDate}
-              onChange={(e) => setNewTripDate(e)}
-            />
+          <div className="set-newtrip-container">
+            <div className="set-tripname-container">
+              <h5>Trip name:</h5>
+              <input
+                className="set-tripname-input"
+                type="text"
+                placeholder="Enter your trip name..."
+                value={newTripName}
+                onChange={(e) => setNewTripName(e.target.value)}
+              />
+            </div>
+            <div className="set-date-container">
+              <h5>Start date:</h5>
+              <DatePicker
+                className="set-date-datepicker"
+                calendarClassName="set-date-datepicker-calendar"
+                dateFormat={"dd/MM/yyyy"}
+                selected={newTripDate}
+                onChange={(e) => setNewTripDate(e)}
+              />
+            </div>
             <div className="add-btn-container">
               <Button
                 buttonColor="btn--blue"
