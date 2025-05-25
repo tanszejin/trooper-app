@@ -1,0 +1,49 @@
+.trip-polls-card {
+  max-height: 25rem;
+  padding: 0;
+}
+
+.polls-ul {
+  min-height: 10rem;
+  padding: 0;
+  list-style-type: none;
+  margin: 0.7rem 0 1.5rem 0;
+  overflow-x: auto;
+}
+
+.polls-ul h6 {
+  font-family: "nunito-bold";
+  background-color: aliceblue;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px #bbb;
+  cursor: pointer;
+}
+
+.polls-ul .add-btn-container {
+  height: 50%;
+  width: 3rem;
+  align-content: center;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  z-index: 1000;
+}
+
+.poll-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 90%;
+  margin: 0;
+  z-index: 1001;
+  align-content: center;
+}

@@ -9,6 +9,7 @@ import Itinerary from "../components/Itinerary";
 import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import Polls from "../components/Polls";
 
 // TODO: add trip members function
 
@@ -78,9 +79,7 @@ function Trip() {
           </div>
           <div className="trip-cards-container">
             <Chat tripId={tripId!}></Chat>
-            <Card className="trip-smaller-card" width="32%" margin="0">
-              <h5 className="trip-card-name">Polls</h5>
-            </Card>
+            <Polls tripId={tripId!}></Polls>
           </div>
         </div>
       </>
