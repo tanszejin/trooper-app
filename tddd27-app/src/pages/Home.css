@@ -1,11 +1,11 @@
 .home-container {
-  height: 50rem;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: #2a88bf;
 }
 
 .home-container h1 {
-  font-family: 'nunito-superbold';
+  font-family: "nunito-superbold";
   color: white;
   width: 100%;
   height: fit-content;
@@ -57,7 +57,7 @@
   border-radius: 10px;
   height: auto;
   padding: 0.5rem;
-  font-size: 1.0rem;
+  font-size: 1rem;
   text-align: left;
   border: none;
   border-left: 2px solid #ddd;
@@ -70,7 +70,7 @@
   border-radius: 10px;
   height: auto;
   padding: 0.5rem;
-  font-size: 1.0rem;
+  font-size: 1rem;
   text-align: left;
   border: none;
   border-left: 2px solid #ddd;
@@ -80,10 +80,10 @@
 .set-date-datepicker-calendar {
   .react-datepicker__week:nth-child(2n) {
     background-color: white;
-  };
-  .react-datepicker__week:nth-child(2n+1) {
+  }
+  .react-datepicker__week:nth-child(2n + 1) {
     background-color: aliceblue;
-  };
+  }
 }
 
 .set-date-datepicker:focus {

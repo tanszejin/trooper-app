@@ -7,15 +7,7 @@ import { auth, db } from "../firebase/firebase";
 import CardDeck from "../components/CardDeck";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  addDoc,
-  collection,
-  getDoc,
-  getDocs,
-  limit,
-  query,
-  where,
-} from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import Button from "../components/Button";
 
 // TODO: babckend, clicking card, add new trip
