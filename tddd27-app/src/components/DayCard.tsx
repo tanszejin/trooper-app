@@ -123,11 +123,11 @@ function DayCard({ day, daysCollectionRef }: Props) {
     console.log("updating date");
     try {
       await updateDoc(doc(daysCollectionRef, day.id), {
-        date: date
-      })
-      console.log("updated date")
+        date: date,
+      });
+      console.log("updated date");
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
   }
 
@@ -145,14 +145,7 @@ function DayCard({ day, daysCollectionRef }: Props) {
   return (
     <>
       <Card className="day-card" height={"100%"} width={"100%"} margin={0}>
-        // make a custom datepicker??
-        <input
-          className="date-input"
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          onBlur={updateDate}
-        />
+        <h4>{date}</h4>
         <ul>
           {events.map((evnt, idx) => (
             <li key={evnt.id}>
