@@ -1,0 +1,26 @@
+.poll-options-ul {
+  min-height: 10rem;
+  padding: 0;
+  list-style-type: none;
+  margin: 0.7rem 0 1.5rem 0;
+  overflow-x: auto;
+}
+
+.poll-options-ul .poll-option-li {
+  font-family: "nunito-bold";
+  background-color: #38b6ff40;
+  padding: 0.3rem;
+  margin: 0.7rem;
+  border-radius: 10px;
+  box-shadow: 0 2px #bbb;
+  cursor: pointer;
+}
+
+.poll-options-ul .poll-option-li:hover {
+  background-color: #38b6ff80;
+}
+
+.poll-options-ul .poll-option-li:active {
+  box-shadow: 0 1px #888;
+  transform: translateY(1px);
+}
