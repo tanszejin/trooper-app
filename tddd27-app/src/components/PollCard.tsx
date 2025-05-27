@@ -28,9 +28,10 @@ interface Props {
 
 function PollCard({ poll, pollsCollectionRef }: Props) {
   const currentUser = auth.currentUser;
-  // TODO: update ui according to below
+  // TODO: update ui according to below, implement voting
   const [voted, setVoted] = useState(false);
   const [votes, setVotes] = useState<any[]>(poll.options);
+  const [totalVotes, setTotalVotes] = useState(0);
 
   useEffect(() => {
     if (!poll) {
@@ -54,6 +55,7 @@ function PollCard({ poll, pollsCollectionRef }: Props) {
         setVoted(false);
         return;
       }
+      setTotalVotes(snapshot.docs.length);
       const votedList = snapshot.docs.map((doc) => doc.data().user_id);
       if (currentUser!.uid in votedList) {
         setVoted(true);
@@ -69,6 +71,15 @@ function PollCard({ poll, pollsCollectionRef }: Props) {
     if (!snapshot.exists()) return;
     const data = snapshot.data().options;
     setVotes(data);
+    let total = 0;
+    votes.forEach((o) => (total += o.votes));
+    setTotalVotes(total);
+  }
+
+  function getPercentage(idx: number) {
+    const fraction = votes[idx].votes / totalVotes;
+    console.log("percentage of votes for", votes[idx].content, ":", fraction);
+    return fraction * 100;
   }
 
   return (
@@ -77,8 +88,17 @@ function PollCard({ poll, pollsCollectionRef }: Props) {
         <h4>{poll.name}</h4>
         <ul className="poll-options-ul">
           {poll.options.map((option, idx) => (
-            <li key={idx} className="poll-option-li">
-              {option.content}
+            <li
+              key={idx}
+              className={`poll-option-li ${voted ? "voted" : "not-voted"}`}
+            >
+              {voted && (
+                <div
+                  className="percentage-bar"
+                  style={{ width: `${voted ? getPercentage(idx) : 0}%` }}
+                ></div>
+              )}
+              <p>{option.content}</p>
             </li>
           ))}
         </ul>
