@@ -6,10 +6,10 @@ import Hero from "./pages/Hero";
 import Home from "./pages/Home";
 import Trip from "./pages/Trip";
 import { useAuth } from "./contexts/authContext";
-
+import AddMember from "./pages/AddMember";
 
 function App() {
-  const {userLoggedIn} = useAuth();
+  const { userLoggedIn } = useAuth();
 
   return (
     <>
@@ -17,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/trip/:tripId" element={<Trip />} />
+          <Route path="/trip/:tripId/add-member" element={<AddMember />} />
           <Route path="*" element={<Home />} />
         </Routes>
       ) : (

@@ -1,0 +1,22 @@
+.add-member-container h3 {
+  font-family: "nunito-superbold";
+  margin-top: 2rem;
+}
+
+.search-user-container {
+  display: flex;
+  padding: 1.5rem;
+}
+
+.search-user-input {
+  flex: 1;
+  padding: 0.2rem 0.5rem;
+  border-radius: 15px;
+  border: 2px solid #0079bf;
+  box-shadow: 0 3px #bbb;
+  background-color: white;
+}
+
+.search-user-input:focus {
+  outline: none;
+}
