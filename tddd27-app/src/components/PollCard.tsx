@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./PollCard.css";
 import Card from "./Card";
 import {
+  addDoc,
   collection,
+  deleteDoc,
   doc,
   DocumentSnapshot,
   getDoc,
@@ -10,9 +12,12 @@ import {
   onSnapshot,
   query,
   QuerySnapshot,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
+import Button from "./Button";
+import { set } from "date-fns";
 
 type pollObj = {
   id: string;
@@ -28,10 +33,12 @@ interface Props {
 
 function PollCard({ poll, pollsCollectionRef }: Props) {
   const currentUser = auth.currentUser;
-  // TODO: update ui according to below, implement voting
   const [voted, setVoted] = useState(false);
   const [votes, setVotes] = useState<any[]>(poll.options);
   const [totalVotes, setTotalVotes] = useState(0);
+  const [votedDoc, setVotedDoc] = useState<any>(null);
+  const [rendered, setRendered] = useState(false);
+  const votedCollectionRef = collection(db, "voted");
 
   useEffect(() => {
     if (!poll) {
@@ -39,6 +46,7 @@ function PollCard({ poll, pollsCollectionRef }: Props) {
       return;
     }
     checkVoted();
+    getTotalVotes();
 
     // add listener
     const docRef = doc(pollsCollectionRef, poll.id);
@@ -46,19 +54,37 @@ function PollCard({ poll, pollsCollectionRef }: Props) {
     return unsubscribe;
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setRendered(true);
+    }, 50); // short delay to allow mount and CSS transition
+    return () => clearTimeout(timeout);
+  }, []);
+
   async function checkVoted() {
     console.log("checkVoted function");
+    setVoted(false);
     try {
-      const q = query(collection(db, "voted"), where("poll_id", "==", poll.id));
+      const q = query(votedCollectionRef, where("poll_id", "==", poll.id));
       const snapshot = await getDocs(q);
       if (snapshot.empty) {
         setVoted(false);
         return;
       }
-      setTotalVotes(snapshot.docs.length);
-      const votedList = snapshot.docs.map((doc) => doc.data().user_id);
-      if (currentUser!.uid in votedList) {
+
+      const data = snapshot.docs.map((doc) => ({
+        user_id: doc.data().user_id,
+        option_idx: doc.data().option_idx,
+        id: doc.id,
+      }));
+      const found = data.find((d) => d.user_id === currentUser!.uid);
+      if (found) {
         setVoted(true);
+        setVotedDoc(found);
+        console.log(
+          "User has already voted for option index:",
+          found.option_idx
+        );
       } else {
         setVoted(false);
       }
@@ -67,12 +93,18 @@ function PollCard({ poll, pollsCollectionRef }: Props) {
     }
   }
 
+  function getTotalVotes() {
+    let total = 0;
+    votes.forEach((o: { votes: number }) => (total += o.votes));
+    setTotalVotes(total);
+  }
+
   function getVotesFromSnapshot(snapshot: DocumentSnapshot) {
     if (!snapshot.exists()) return;
     const data = snapshot.data().options;
     setVotes(data);
     let total = 0;
-    votes.forEach((o) => (total += o.votes));
+    data.forEach((o: { votes: number }) => (total += o.votes));
     setTotalVotes(total);
   }
 
@@ -82,26 +114,100 @@ function PollCard({ poll, pollsCollectionRef }: Props) {
     return fraction * 100;
   }
 
+  async function castVote(idx: number) {
+    if (voted) {
+      console.log("Already voted");
+      return;
+    }
+    // update votes
+    const updatedVotes = [...votes];
+    updatedVotes[idx].votes += 1;
+    setVoted(true);
+
+    // update firestore
+    try {
+      await updateDoc(doc(pollsCollectionRef, poll.id), {
+        options: updatedVotes,
+      });
+      console.log("Vote cast successfully");
+      const docRef = await addDoc(votedCollectionRef, {
+        poll_id: poll.id,
+        user_id: currentUser!.uid,
+        option_idx: idx,
+      });
+      const newVotedDoc = {
+        poll_id: poll.id,
+        user_id: currentUser!.uid,
+        option_idx: idx,
+        id: docRef.id,
+      };
+      setVotedDoc(newVotedDoc);
+      console.log("Vote recorded in voted collection");
+    } catch (e) {
+      console.error("Error casting vote:", e);
+    }
+  }
+
+  async function retractVote() {
+    if (!voted || votedDoc === null) {
+      console.log("not voted yet");
+      return;
+    }
+    // update votes
+    const updatedVotes = [...votes];
+    updatedVotes[votedDoc.option_idx].votes -= 1;
+
+    // update firestore
+    try {
+      await Promise.all([
+        updateDoc(doc(pollsCollectionRef, poll.id), {
+          options: updatedVotes,
+        }),
+        deleteDoc(doc(votedCollectionRef, votedDoc.id)),
+      ]);
+      console.log("Vote retracted successfully");
+      setVoted(false);
+      setVotedDoc(null);
+    } catch (e) {
+      console.error("Error retracting vote:", e);
+    }
+  }
+
   return (
     <div>
       <Card className="poll-card" height={"100%"} width={"100%"} margin={0}>
         <h4>{poll.name}</h4>
         <ul className="poll-options-ul">
-          {poll.options.map((option, idx) => (
+          {votes.map((option, idx) => (
             <li
               key={idx}
-              className={`poll-option-li ${voted ? "voted" : "not-voted"}`}
+              className={`poll-option-li ${voted ? "voted" : "not-voted"} ${
+                votedDoc && votedDoc.option_idx === idx ? "voted-this" : ""
+              }`}
+              onClick={(e) => castVote(idx)}
             >
-              {voted && (
-                <div
-                  className="percentage-bar"
-                  style={{ width: `${voted ? getPercentage(idx) : 0}%` }}
-                ></div>
-              )}
+              <div
+                className="percentage-bar"
+                style={{
+                  width: `${rendered && voted ? getPercentage(idx) : 0}%`,
+                }}
+              ></div>
               <p>{option.content}</p>
             </li>
           ))}
         </ul>
+        {voted && (
+          <div className="button-container">
+            <Button
+              buttonColor="btn--blue"
+              buttonStyle="btn--lesspress"
+              buttonSize="btn--small"
+              onClick={retractVote}
+            >
+              Retract vote
+            </Button>
+          </div>
+        )}
       </Card>
     </div>
   );

@@ -6,6 +6,7 @@
 .polls-ul {
   min-height: 10rem;
   padding: 0;
+  padding-bottom: 0.5rem;
   list-style-type: none;
   margin: 0.7rem 0 1.5rem 0;
   overflow-x: auto;
@@ -36,7 +37,10 @@
   z-index: 1000;
 }
 
-.poll-container {
+.poll-container,
+.set-newpoll-container {
+  background-color: aliceblue;
+  border-radius: 15px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -45,4 +49,32 @@
   margin: 0;
   z-index: 1001;
   align-content: center;
+}
+
+.set-newpoll-container {
+  padding: 3rem 0;
+}
+
+.set-pollname-container,
+.set-options-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+}
+
+.set-options-container {
+  margin-top: 2rem;
+}
+
+.set-newpoll-container h5 {
+  margin-right: 1rem;
+  align-self: center;
+}
+
+.set-pollname-input,
+.set-options-textarea {
+  flex: 1;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
 }

@@ -28,9 +28,13 @@
   transform: translateY(1px);
 }
 
+.poll-options-ul .poll-option-li.voted.voted-this {
+  border: #1281c2 solid 2px;
+}
+
 .poll-options-ul .percentage-bar {
   height: 100%;
-  padding: 0.3rem;
+  width: 0%;
   background-color: #38b6ff80;
   text-align: center;
   transition: width 0.3s ease;
@@ -48,4 +52,9 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.poll-card .button-container {
+  width: 20%;
+  margin: auto;
 }

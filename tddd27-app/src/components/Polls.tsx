@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./Polls.css";
 import {
+  addDoc,
   collection,
   getDocs,
   onSnapshot,
   orderBy,
   query,
   QuerySnapshot,
+  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import Card from "./Card";
 import Button from "./Button";
 import PollCard from "./PollCard";
+import { set } from "date-fns";
 
 interface Props {
   tripId: string;
@@ -20,6 +23,9 @@ interface Props {
 function Polls({ tripId }: Props) {
   const [polls, setPolls] = useState<any[]>([]);
   const [showPollIdx, setShowPollIdx] = useState(-1);
+  const [addingNewPoll, setAddingNewPoll] = useState(false);
+  const [newPollName, setNewPollName] = useState("");
+  const [newPollOptions, setNewPollOptions] = useState<any[]>([]);
   const pollsCollectionRef = collection(db, "trips", tripId, "polls");
 
   useEffect(() => {
@@ -56,7 +62,28 @@ function Polls({ tripId }: Props) {
     setPolls(data);
   }
 
-  function addNewPoll() {}
+  async function addNewPoll() {
+    console.log("addNewPoll function");
+    const newPoll = {
+      created_at: serverTimestamp(),
+      name: newPollName,
+      options: newPollOptions.map((opt) => ({
+        content: opt.trim(),
+        votes: 0,
+      })),
+    };
+    setNewPollName("");
+    setNewPollOptions([]);
+
+    try {
+      await addDoc(pollsCollectionRef, newPoll);
+      console.log("new poll added");
+    } catch (e) {
+      console.error(e);
+    }
+
+    setAddingNewPoll(false);
+  }
 
   return (
     <>
@@ -76,7 +103,7 @@ function Polls({ tripId }: Props) {
           <li key={-1}>
             <div className="add-btn-container">
               <Button
-                onClick={addNewPoll}
+                onClick={() => setAddingNewPoll(true)}
                 buttonColor="btn--white"
                 buttonStyle="btn--mediumpress"
                 buttonSize="btn--large"
@@ -95,6 +122,45 @@ function Polls({ tripId }: Props) {
               poll={polls[showPollIdx]}
               pollsCollectionRef={pollsCollectionRef}
             ></PollCard>
+          </div>
+        </>
+      )}
+      {addingNewPoll && (
+        <>
+          <div
+            className="backdrop"
+            onClick={() => setAddingNewPoll(false)}
+          ></div>
+          <div className="set-newpoll-container">
+            <div className="set-pollname-container">
+              <h5>Poll name:</h5>
+              <input
+                className="set-pollname-input"
+                type="text"
+                placeholder="Enter your poll name..."
+                value={newPollName}
+                onChange={(e) => setNewPollName(e.target.value)}
+              />
+            </div>
+            <div className="set-options-container">
+              <h5>Options:</h5>
+              <textarea
+                className="set-options-textarea"
+                placeholder="Enter options separated by commas..."
+                value={newPollOptions.join(", ")}
+                onChange={(e) => setNewPollOptions(e.target.value.split(", "))}
+              />
+            </div>
+            <div className="add-btn-container">
+              <Button
+                buttonColor="btn--blue"
+                buttonStyle="btn--mediumpress"
+                buttonSize="btn--medium"
+                onClick={addNewPoll}
+              >
+                Add
+              </Button>
+            </div>
           </div>
         </>
       )}
