@@ -1,52 +1,61 @@
 .trip-container {
-    height: auto;
-    width: 90%;
-    margin: auto;
+  height: auto;
+  width: 90%;
+  margin: auto;
+}
+
+.trip-header {
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
 }
 
 .trip-name {
-    width: fit-content;
-    font-family: 'nunito-superbold';
-    font-size: 2rem;
-    justify-self: start;
-    margin: 1.8rem 0.5rem;
-    /* color: #0079bf; */
+  width: fit-content;
+  font-family: "nunito-superbold";
+  font-size: 2rem;
+  justify-self: start;
+  margin: 1.8rem 0.5rem;
+  /* color: #0079bf; */
+}
+
+.trip-header .button-container {
+  align-content: center;
 }
 
 .trip-cards-container {
-    height: 100%;
-    width: 100%;
-    min-width: 800px; /* TODO: CHANGE MIN WIDTH SO THAT ITS RESPONSIVE */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* border: 2px solid red; */
-    margin-bottom: 20px;
+  height: 100%;
+  width: 100%;
+  min-width: 800px; /* TODO: CHANGE MIN WIDTH SO THAT ITS RESPONSIVE */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 2px solid red; */
+  margin-bottom: 20px;
 }
 
 .trip-image-container {
-    justify-self: start;
+  justify-self: start;
 }
 
 .trip-image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 15px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 .trip-itinerary-card {
-    min-height: 24rem;
-    justify-self: end;
-    min-width: 100px;
+  min-height: 24rem;
+  justify-self: end;
+  min-width: 100px;
 }
 
 .trip-smaller-card {
-    align-self: flex-start;
+  align-self: flex-start;
 }
 
 .trip-card-name {
-    font-family: 'nunito-superbold';
-    font-size: large;
+  font-family: "nunito-superbold";
+  font-size: large;
 }
-

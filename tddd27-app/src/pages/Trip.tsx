@@ -10,6 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import Polls from "../components/Polls";
+import Button from "../components/Button";
 
 // TODO: add trip members function
 
@@ -60,7 +61,19 @@ function Trip() {
       <>
         <NavBar navbarColor="navbar--blue" />
         <div className="trip-container">
-          <h3 className="trip-name">{trip.trip_name}</h3>
+          <div className="trip-header">
+            <h3 className="trip-name">{trip.trip_name}</h3>
+            <div className="button-container">
+              <Button
+                buttonColor="btn--white"
+                buttonStyle="btn--lesspress"
+                buttonSize="btn--small"
+                onClick={() => navigate("/trip/" + tripId + "/add-member")}
+              >
+                Add member
+              </Button>
+            </div>
+          </div>
           <div className="trip-cards-container">
             <Card
               className="trip-image-card"
