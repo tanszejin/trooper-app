@@ -70,7 +70,7 @@ function Trip() {
                 buttonSize="btn--small"
                 onClick={() => navigate("/trip/" + tripId + "/add-member")}
               >
-                Add member
+                Manage members
               </Button>
             </div>
           </div>

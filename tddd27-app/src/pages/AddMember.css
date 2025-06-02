@@ -1,4 +1,4 @@
-.add-member-container h3 {
+h3 {
   font-family: "nunito-superbold";
   margin-top: 2rem;
 }
@@ -21,13 +21,15 @@
   outline: none;
 }
 
-.search-result-ul {
+.search-result-ul,
+.current-member-ul {
   list-style-type: none;
   padding: 1.5rem 0;
   overflow-x: auto;
 }
 
-.search-result-listitem {
+.search-result-listitem,
+.current-member-listitem {
   background-color: #70b9ef60;
   width: 90%;
   padding: 0.5rem 1.5rem;
@@ -38,12 +40,14 @@
   box-shadow: 0 3px #bbb;
 }
 
-.search-result-name {
+.search-result-name,
+.current-member-name {
   text-align: left;
   font-family: "nunito-bold";
   font-size: 1.2rem;
 }
 
-.search-result-name span {
+.search-result-name span,
+.current-member-name span {
   margin-right: 0.2rem;
 }
