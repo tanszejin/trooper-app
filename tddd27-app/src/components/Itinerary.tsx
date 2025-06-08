@@ -85,18 +85,18 @@ function Itinerary({ tripId }: Props) {
       };
       const dayRef = await addDoc(daysCollectionRef, newDay);
       console.log("new day added");
-      const newEmptyEvent = {
-        name: "new event",
-        description: "",
-        time: theNextDay,
-        location: "",
-        members: [],
-      };
-      await addDoc(
-        collection(daysCollectionRef, dayRef.id, "events"),
-        newEmptyEvent
-      );
-      console.log("empty event added");
+      // const newEmptyEvent = {
+      //   name: "new event",
+      //   description: "",
+      //   time: theNextDay,
+      //   location: "",
+      //   members: [],
+      // };
+      // await addDoc(
+      //   collection(daysCollectionRef, dayRef.id, "events"),
+      //   newEmptyEvent
+      // );
+      // console.log("empty event added");
       getDays();
     } catch (e) {
       console.error(e);

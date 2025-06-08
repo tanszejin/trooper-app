@@ -20,7 +20,7 @@ function Home() {
   const [showNavBar, setShowNavBar] = useState(true);
   const [addingNewTrip, setAddingNewTrip] = useState(false);
   const [newTripName, setNewTripName] = useState("");
-  const [newTripDate, setNewTripDate] = useState<Date | null>(new Date());
+  const [newTripDate, setNewTripDate] = useState<Date>(new Date());
 
   const [tripIds, setTripIds] = useState<string[]>([]);
 
@@ -79,14 +79,19 @@ function Home() {
     console.log("adding new trip");
     const newTrip = {
       created_by: currentUser!.uid,
-      image_url: "/images/example_2.jpg",
+      image_url:
+        "/images/example_" + `${Math.floor(Math.random() * 6) + 1}` + ".jpg",
       trip_name: newTripName,
     };
     try {
       const tripRef = await addDoc(collection(db, "trips"), newTrip);
       console.log("new trip added");
       const newDay = {
-        date: newTripDate,
+        date: new Date(
+          newTripDate!.getFullYear(),
+          newTripDate!.getMonth(),
+          newTripDate!.getDate()
+        ),
       };
       await addDoc(collection(tripRef, "days"), newDay);
       console.log("first day added");
@@ -151,7 +156,7 @@ function Home() {
                 calendarClassName="set-date-datepicker-calendar"
                 dateFormat={"dd/MM/yyyy"}
                 selected={newTripDate}
-                onChange={(e) => setNewTripDate(e)}
+                onChange={(e) => setNewTripDate(e!)}
               />
             </div>
             <div className="add-btn-container">

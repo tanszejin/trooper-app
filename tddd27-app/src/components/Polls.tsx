@@ -147,8 +147,8 @@ function Polls({ tripId }: Props) {
               <textarea
                 className="set-options-textarea"
                 placeholder="Enter options separated by commas..."
-                value={newPollOptions.join(", ")}
-                onChange={(e) => setNewPollOptions(e.target.value.split(", "))}
+                value={newPollOptions.join(",")}
+                onChange={(e) => setNewPollOptions(e.target.value.split(","))}
               />
             </div>
             <div className="add-btn-container">

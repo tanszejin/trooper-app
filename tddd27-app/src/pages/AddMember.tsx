@@ -6,6 +6,9 @@ import Button from "../components/Button";
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
+  getDoc,
   getDocs,
   onSnapshot,
   query,
@@ -29,8 +32,8 @@ function AddMember() {
     getCurrentMembers();
 
     // add listener
-    const q = query(tripUsersCollectionRef);
-    const unsubscribe = onSnapshot(q, setCurrentMembersFromSnapshot);
+    const q = query(tripUsersCollectionRef, where("trip_id", "==", tripId));
+    const unsubscribe = onSnapshot(q, getCurrentMembersFromSnapshot);
     return unsubscribe;
   }, []);
 
@@ -39,16 +42,22 @@ function AddMember() {
     try {
       const q = query(tripUsersCollectionRef, where("trip_id", "==", tripId));
       const snapshot = await getDocs(q);
-      const userIds = snapshot.docs.map((doc) => doc.data().user_id);
-      const qMembers = query(
-        collection(db, "users"),
-        where("user_id", "in", userIds)
-      );
-      const snapshotMembers = await getDocs(qMembers);
-      setCurrentMembersFromSnapshot(snapshotMembers);
+      getCurrentMembersFromSnapshot(snapshot);
     } catch (e) {
       console.error(e);
     }
+  }
+
+  async function getCurrentMembersFromSnapshot(snapshot: QuerySnapshot) {
+    if (snapshot.empty) return;
+    console.log("getCurrentMembersFromSnapshot function");
+    const userIds = snapshot.docs.map((doc) => doc.data().user_id);
+    const qMembers = query(
+      collection(db, "users"),
+      where("user_id", "in", userIds)
+    );
+    const snapshotMembers = await getDocs(qMembers);
+    setCurrentMembersFromSnapshot(snapshotMembers);
   }
 
   function setCurrentMembersFromSnapshot(snapshot: QuerySnapshot) {
@@ -103,6 +112,21 @@ function AddMember() {
     }
   }
 
+  async function removeUserFromTrip(user: any) {
+    console.log("removeUserFromTrip function");
+    try {
+      const q = query(
+        tripUsersCollectionRef,
+        where("trip_id", "==", tripId),
+        where("user_id", "==", user.id)
+      );
+      const snapshot = await getDocs(q);
+      await deleteDoc(doc(tripUsersCollectionRef, snapshot.docs[0].id));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   return (
     <>
       <NavBar navbarColor="navbar--blue"></NavBar>
@@ -122,6 +146,16 @@ function AddMember() {
                 </div>
                 <span className="current-member-email">{member.email}</span>
               </div>
+              <Button
+                buttonColor="btn--white"
+                buttonStyle="btn--lesspress"
+                buttonSize="btn--small"
+                onClick={() => {
+                  removeUserFromTrip(member);
+                }}
+              >
+                Remove
+              </Button>
             </li>
           ))}
         </ul>
