@@ -1,7 +1,7 @@
 ## Collaborative Trip-Planning Platform ##
 
 ### Screencast submission links
-Project screencast: https://youtu.be/w2TNTM1fgko
+Project screencast: https://youtu.be/w2TNTM1fgko      
 Code screencast: https://youtu.be/yv12lrdMN1w
 
 ### Functional Specification ###
