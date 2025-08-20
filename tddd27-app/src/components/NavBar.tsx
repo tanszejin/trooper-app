@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import Button from "./Button";
@@ -6,12 +5,12 @@ import { useAuth } from "../contexts/authContext";
 import { doSignOut } from "../firebase/auth";
 
 interface Props {
-  navbarColor: string
+  navbarColor: string;
 }
 
-const COLORS = ['navbar--blue', 'navbar--lightblue']
+const COLORS = ["navbar--blue", "navbar--lightblue"];
 
-function NavBar({navbarColor}: Props) {
+function NavBar({ navbarColor }: Props) {
   const navigate = useNavigate();
   const { userLoggedIn } = useAuth();
 
@@ -26,7 +25,11 @@ function NavBar({navbarColor}: Props) {
 
   return (
     <nav className="navbar">
-      <div className={`navbar-container ${COLORS.includes(navbarColor) ? navbarColor : COLORS[0]}`}>
+      <div
+        className={`navbar-container ${
+          COLORS.includes(navbarColor) ? navbarColor : COLORS[0]
+        }`}
+      >
         <Link to="/home" className="navbar-title">
           trooper
         </Link>

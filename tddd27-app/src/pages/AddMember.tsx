@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddMember.css";
 import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
@@ -8,7 +8,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
   getDocs,
   onSnapshot,
   query,

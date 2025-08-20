@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import "./Trip.css";
 import Card from "../components/Card";
@@ -7,7 +7,7 @@ import Reminders from "../components/Reminders";
 import Chat from "../components/Chat";
 import Itinerary from "../components/Itinerary";
 import { useNavigate, useParams } from "react-router-dom";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import Polls from "../components/Polls";
 import Button from "../components/Button";
@@ -42,19 +42,19 @@ function Trip() {
     }
   }
 
-  async function handleRemindersUpdate(newReminders: string[]) {
-    console.log("updating reminders");
-    try {
-      await updateDoc(doc(db, "trips", tripId!), {
-        reminders: newReminders,
-      });
-      console.log("updated reminders");
-      return true;
-    } catch (e) {
-      console.error(e);
-      return false;
-    }
-  }
+  // async function handleRemindersUpdate(newReminders: string[]) {
+  //   console.log("updating reminders");
+  //   try {
+  //     await updateDoc(doc(db, "trips", tripId!), {
+  //       reminders: newReminders,
+  //     });
+  //     console.log("updated reminders");
+  //     return true;
+  //   } catch (e) {
+  //     console.error(e);
+  //     return false;
+  //   }
+  // }
 
   if (trip)
     return (

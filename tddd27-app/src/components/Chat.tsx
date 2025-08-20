@@ -14,7 +14,6 @@ import {
   query,
   QuerySnapshot,
   serverTimestamp,
-  updateDoc,
 } from "firebase/firestore";
 
 interface Props {

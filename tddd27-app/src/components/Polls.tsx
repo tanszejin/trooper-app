@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Polls.css";
 import {
   addDoc,
@@ -14,7 +14,7 @@ import { db } from "../firebase/firebase";
 import Card from "./Card";
 import Button from "./Button";
 import PollCard from "./PollCard";
-import { set } from "date-fns";
+// import { set } from "date-fns";
 
 interface Props {
   tripId: string;

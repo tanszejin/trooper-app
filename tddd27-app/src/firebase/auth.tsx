@@ -15,8 +15,8 @@ export async function doCreateUserWithEmailAndPassword(
   email: string,
   firstName: string,
   lastName: string,
-  password: string,
-  confirmPassword: string
+  password: string
+  // confirmPassword: string
 ) {
   try {
     createUserWithEmailAndPassword(auth, email, password).then(async (data) => {

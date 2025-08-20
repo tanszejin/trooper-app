@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./DayCard.css";
 import Card from "./Card";
 import DayEvent from "./DayEvent";
 import Button from "./Button";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa";
+// import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import {
   addDoc,
   collection,
@@ -25,7 +25,7 @@ interface Props {
 }
 
 function DayCard({ day, daysCollectionRef }: Props) {
-  const [date, setDate] = useState(format(day.date.toDate(), "dd MMM yyyy"));
+  // const [date, setDate] = useState();
   const [events, setEvents] = useState<any[]>([]);
   const eventsCollectionRef = collection(daysCollectionRef, day.id, "events");
 
@@ -89,47 +89,47 @@ function DayCard({ day, daysCollectionRef }: Props) {
     }
   }
 
-  async function swapTimes(a: number, b: number) {
-    try {
-      await Promise.all([
-        updateDoc(doc(eventsCollectionRef, events[a].id), {
-          time: events[b].time,
-        }),
-        updateDoc(doc(eventsCollectionRef, events[b].id), {
-          time: events[a].time,
-        }),
-      ]);
-      console.log("updated event times");
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  // async function swapTimes(a: number, b: number) {
+  //   try {
+  //     await Promise.all([
+  //       updateDoc(doc(eventsCollectionRef, events[a].id), {
+  //         time: events[b].time,
+  //       }),
+  //       updateDoc(doc(eventsCollectionRef, events[b].id), {
+  //         time: events[a].time,
+  //       }),
+  //     ]);
+  //     console.log("updated event times");
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
-  function moveEventUp(idx: number) {
-    if (idx === 0) {
-      return;
-    }
-    swapTimes(idx - 1, idx);
-  }
+  // function moveEventUp(idx: number) {
+  //   if (idx === 0) {
+  //     return;
+  //   }
+  //   swapTimes(idx - 1, idx);
+  // }
 
-  function moveEventDown(idx: number) {
-    if (idx === events.length - 1) {
-      return;
-    }
-    swapTimes(idx, idx + 1);
-  }
+  // function moveEventDown(idx: number) {
+  //   if (idx === events.length - 1) {
+  //     return;
+  //   }
+  //   swapTimes(idx, idx + 1);
+  // }
 
-  async function updateDate() {
-    console.log("updating date");
-    try {
-      await updateDoc(doc(daysCollectionRef, day.id), {
-        date: date,
-      });
-      console.log("updated date");
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  // async function updateDate() {
+  //   console.log("updating date");
+  //   try {
+  //     await updateDoc(doc(daysCollectionRef, day.id), {
+  //       date: date,
+  //     });
+  //     console.log("updated date");
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
   async function updateEvent(id: string, updatedPart: Partial<any>) {
     // updatedPart can be an object with some (or all) of the fields of Event
@@ -145,9 +145,9 @@ function DayCard({ day, daysCollectionRef }: Props) {
   return (
     <>
       <Card className="day-card" height={"100%"} width={"100%"} margin={0}>
-        <h4>{date}</h4>
+        <h4>{format(day.date.toDate(), "dd MMM yyyy")}</h4>
         <ul>
-          {events.map((evnt, idx) => (
+          {events.map((evnt) => (
             <li key={evnt.id}>
               <DayEvent
                 event={evnt}

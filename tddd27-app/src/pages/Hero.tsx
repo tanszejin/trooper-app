@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Hero.css";
 import Button from "../components/Button.tsx";
 import SignInCard from "../components/SignInCard.tsx";
@@ -6,10 +6,10 @@ import SignUpCard from "../components/SignUpCard.tsx";
 import {
   doCreateUserWithEmailAndPassword,
   doSignInWithEmailAndPassword,
-  doSignInWithGoogle,
+  // doSignInWithGoogle,
 } from "../firebase/auth.tsx";
 import { useAuth } from "../contexts/authContext/index.tsx";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function Hero() {
   // using the useAuth hook
@@ -26,7 +26,7 @@ function Hero() {
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
   const onSignInClick = () => {
     console.log("sign in button clicked");
@@ -56,17 +56,17 @@ function Hero() {
     console.log(cred);
   };
 
-  const onGoogleSignIn = async () => {
-    if (isSigningIn) {
-      console.log("user is already signing in");
-      return;
-    }
-    setIsSigningIn(true);
-    await doSignInWithGoogle().catch((err) => {
-      setIsSigningIn(false);
-      console.log(err);
-    });
-  };
+  // const onGoogleSignIn = async () => {
+  //   if (isSigningIn) {
+  //     console.log("user is already signing in");
+  //     return;
+  //   }
+  //   setIsSigningIn(true);
+  //   await doSignInWithGoogle().catch((err) => {
+  //     setIsSigningIn(false);
+  //     console.log(err);
+  //   });
+  // };
   // TODO: implement google sign in on ui
 
   const handleSignUp = async () => {
@@ -88,8 +88,8 @@ function Hero() {
       signUpEmail,
       signUpFirstName,
       signUpLastName,
-      signUpPassword,
-      signUpConfirmPassword
+      signUpPassword
+      // signUpConfirmPassword
     ).catch((err) => {
       setIsSigningUp(false);
       console.error(err);

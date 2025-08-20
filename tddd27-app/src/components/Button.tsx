@@ -1,4 +1,3 @@
-import React from "react";
 import "./Button.css";
 
 const COLORS = ["btn--white", "btn--clear", "btn--blue"];

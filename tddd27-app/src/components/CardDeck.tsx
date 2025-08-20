@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./CardDeck.css";
 import Card from "./Card";
 import {
   collection,
   getDocs,
-  onSnapshot,
   query,
   QuerySnapshot,
   where,
@@ -37,6 +36,7 @@ function CardDeck({ tripIds, onClick }: Props) {
         (CARDDECK_SIZE_RATIO * size - CARD_WIDTH) /
           (trips.length <= 1 ? 1 : trips.length - 1)
       );
+      console.log("offset: ", offset);
     };
     window.addEventListener("resize", handleResize);
     handleResize();

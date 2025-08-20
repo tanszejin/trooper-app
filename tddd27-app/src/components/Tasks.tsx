@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./Tasks.css";
 import {

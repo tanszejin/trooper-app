@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "./Button";
 import Card from "./Card";
 
@@ -20,9 +19,7 @@ function SignUpCard({
   handleSignUp,
 }: Props) {
   return (
-    <Card
-      className="sign-up-card" width={300}
-    >
+    <Card className="sign-up-card" width={300}>
       <input
         type="email"
         placeholder="Email"

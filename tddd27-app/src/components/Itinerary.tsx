@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Itinerary.css";
 import Card from "./Card";
 import ItineraryDay from "./ItineraryDay";
 import Button from "./Button";
 import DayCard from "./DayCard";
 import {
-  addDoc,
+  // addDoc,
   collection,
   getDocs,
   onSnapshot,
   orderBy,
   query,
   QuerySnapshot,
-  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 // TODO: add day function, logic
-type Event = {
-  name: string;
-  description: string;
-  time: string;
-  location: string;
-  members: string;
-};
+// type Event = {
+//   name: string;
+//   description: string;
+//   time: string;
+//   location: string;
+//   members: string;
+// };
 
 interface Props {
   tripId: string;
@@ -73,17 +72,17 @@ function Itinerary({ tripId }: Props) {
     try {
       // if no days yet then put current date first
       // TODO: ui for editing date
-      const theNextDay =
-        days.length === 0
-          ? new Date("2025-10-05 00:00:00")
-          : new Date(
-              days[days.length - 1].date.toDate().getTime() +
-                24 * 60 * 60 * 1000
-            );
-      const newDay = {
-        date: theNextDay,
-      };
-      const dayRef = await addDoc(daysCollectionRef, newDay);
+      // const theNextDay =
+      //   days.length === 0
+      //     ? new Date("2025-10-05 00:00:00")
+      //     : new Date(
+      //         days[days.length - 1].date.toDate().getTime() +
+      //           24 * 60 * 60 * 1000
+      //       );
+      // const newDay = {
+      //   date: theNextDay,
+      // };
+      // const dayRef = await addDoc(daysCollectionRef, newDay);
       console.log("new day added");
       // const newEmptyEvent = {
       //   name: "new event",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./PollCard.css";
 import Card from "./Card";
 import {
@@ -7,17 +7,15 @@ import {
   deleteDoc,
   doc,
   DocumentSnapshot,
-  getDoc,
   getDocs,
   onSnapshot,
   query,
-  QuerySnapshot,
   updateDoc,
   where,
 } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import Button from "./Button";
-import { set } from "date-fns";
+// import { set } from "date-fns";
 
 type pollObj = {
   id: string;
@@ -184,7 +182,7 @@ function PollCard({ poll, pollsCollectionRef }: Props) {
               className={`poll-option-li ${voted ? "voted" : "not-voted"} ${
                 votedDoc && votedDoc.option_idx === idx ? "voted-this" : ""
               }`}
-              onClick={(e) => castVote(idx)}
+              onClick={(_) => castVote(idx)}
             >
               <div
                 className="percentage-bar"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import "./Home.css";
 import { useAuth } from "../contexts/authContext";
@@ -17,7 +17,7 @@ function Home() {
   const { userLoggedIn } = useAuth();
   const currentUser = auth.currentUser;
 
-  const [showNavBar, setShowNavBar] = useState(true);
+  // const [showNavBar, setShowNavBar] = useState(true);
   const [addingNewTrip, setAddingNewTrip] = useState(false);
   const [newTripName, setNewTripName] = useState("");
   const [newTripDate, setNewTripDate] = useState<Date>(new Date());
@@ -111,7 +111,7 @@ function Home() {
     <>
       {!userLoggedIn && <Navigate to={"/hero"} replace={true} />}
       <div className="home-container">
-        {showNavBar && <NavBar navbarColor="navbar--lightblue" />}
+        {<NavBar navbarColor="navbar--lightblue" />}
         <h1>Welcome, {currentUser != null ? currentUser.email : ""}</h1>
         {tripIds.length > 0 && (
           <div className="carddeck-container">

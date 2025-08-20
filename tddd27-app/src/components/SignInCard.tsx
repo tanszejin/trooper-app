@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "./Button";
 import Card from "./Card";
 
@@ -10,9 +9,7 @@ interface Props {
 
 function SignInCard({ setEmail, setPassword, handleSignIn }: Props) {
   return (
-    <Card
-      className="sign-in-card" width={300}
-    >
+    <Card className="sign-in-card" width={300}>
       <input
         type="email"
         placeholder="Email"
