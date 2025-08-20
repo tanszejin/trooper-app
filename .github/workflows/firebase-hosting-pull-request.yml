@@ -17,6 +17,7 @@ jobs:
         working-directory: ./tddd27-app
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entryPoint: ./tddd27-app
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TROOPER_SG }}
           projectId: trooper-sg
