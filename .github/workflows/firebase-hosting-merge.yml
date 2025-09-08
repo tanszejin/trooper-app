@@ -12,11 +12,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci
-        working-directory: ./tddd27-app
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          entryPoint: ./tddd27-app
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TROOPER_SG }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TROOPER_4C128 }}
           channelId: live
-          projectId: trooper-sg
+          projectId: trooper-4c128
+
+
+# name: Deploy to Firebase Hosting on merge
+# on:
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   build_and_deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - run: npm ci
+#         working-directory: ./tddd27-app
+#       - uses: FirebaseExtended/action-hosting-deploy@v0
+#         with:
+#           entryPoint: ./tddd27-app
+#           repoToken: ${{ secrets.GITHUB_TOKEN }}
+#           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TROOPER_SG }}
+#           channelId: live
+#           projectId: trooper-sg

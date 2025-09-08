@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "trooper-sg"
-  }
+    "default": "trooper-4c128",
+    "trooper-eu": "trooper-4c128"
+  },
+  "targets": {},
+  "etags": {}
 }
