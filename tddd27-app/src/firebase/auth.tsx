@@ -30,6 +30,7 @@ export async function doCreateUserWithEmailAndPassword(
     });
   } catch (e) {
     console.error(e);
+    throw e;
   }
   return;
 }

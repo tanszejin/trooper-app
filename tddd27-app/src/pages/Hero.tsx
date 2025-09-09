@@ -10,6 +10,7 @@ import {
 } from "../firebase/auth.tsx";
 import { useAuth } from "../contexts/authContext/index.tsx";
 import { Navigate } from "react-router-dom";
+import { set } from "date-fns";
 
 function Hero() {
   // using the useAuth hook
@@ -26,18 +27,20 @@ function Hero() {
   const [signUpConfirmPassword, setSignUpConfirmPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSignInClick = () => {
     console.log("sign in button clicked");
     setShowSignInCard(true);
     setShowSignUpCard(false);
+    setErrorMessage("")
   };
 
   const onSignUpClick = () => {
     console.log("sign up button clicked");
     setShowSignInCard(false);
     setShowSignUpCard(true);
+    setErrorMessage("")
   };
 
   const handleSignIn = async () => {
@@ -52,6 +55,7 @@ function Hero() {
     ).catch((err) => {
       setIsSigningIn(false);
       console.log(err);
+      setErrorMessage("incorrect username or password. please try again.");
     });
     console.log(cred);
   };
@@ -93,6 +97,7 @@ function Hero() {
     ).catch((err) => {
       setIsSigningUp(false);
       console.error(err);
+      setErrorMessage(err.message);
     });
   };
 
@@ -122,24 +127,24 @@ function Hero() {
             </Button>
           </div>
         </div>
-
         {showSignInCard && (
           <SignInCard
-            setEmail={setSignInEmail}
-            setPassword={setSignInPassword}
-            handleSignIn={handleSignIn}
+          setEmail={setSignInEmail}
+          setPassword={setSignInPassword}
+          handleSignIn={handleSignIn}
           />
         )}
         {showSignUpCard && (
           <SignUpCard
-            setEmail={setSignUpEmail}
-            setFirstName={setSignUpFirstName}
-            setLastName={setSignUpLastName}
-            setPassword={setSignUpPassword}
-            setConfirmPassword={setSignUpConfirmPassword}
-            handleSignUp={handleSignUp}
+          setEmail={setSignUpEmail}
+          setFirstName={setSignUpFirstName}
+          setLastName={setSignUpLastName}
+          setPassword={setSignUpPassword}
+          setConfirmPassword={setSignUpConfirmPassword}
+          handleSignUp={handleSignUp}
           />
         )}
+        <div className="error-message">{errorMessage}</div>        
       </div>
     </>
   );
