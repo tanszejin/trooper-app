@@ -8,6 +8,13 @@ interface Props {
 }
 
 function SignInCard({ setEmail, setPassword, handleSignIn }: Props) {
+
+  function signInOnEnter(e: React.KeyboardEvent) {
+      if (e.key === "Enter") {
+        handleSignIn();
+      }
+    }
+
   return (
     <Card className="sign-in-card" width={300}>
       <input
@@ -32,6 +39,7 @@ function SignInCard({ setEmail, setPassword, handleSignIn }: Props) {
           padding: "0.5rem",
           borderRadius: "25px",
         }}
+        onKeyUp={signInOnEnter}
         required
       />
       <Button
