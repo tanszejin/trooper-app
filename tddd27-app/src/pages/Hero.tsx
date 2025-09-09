@@ -10,7 +10,6 @@ import {
 } from "../firebase/auth.tsx";
 import { useAuth } from "../contexts/authContext/index.tsx";
 import { Navigate } from "react-router-dom";
-import { set } from "date-fns";
 
 function Hero() {
   // using the useAuth hook
