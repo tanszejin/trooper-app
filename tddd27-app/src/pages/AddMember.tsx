@@ -126,9 +126,23 @@ function AddMember() {
     }
   }
 
+  function goBack() {
+    window.history.back();
+  }
+
   return (
     <>
       <NavBar navbarColor="navbar--blue"></NavBar>
+      <div className="back-btn-container">
+        <Button
+          buttonColor="btn--white"
+          buttonStyle="btn--lesspress"
+          buttonSize="btn--small"
+          onClick={goBack}
+        >
+          back
+        </Button>
+      </div>
       <div className="current-members-container">
         <h3>Current members</h3>
         <ul className="current-members-ul">
