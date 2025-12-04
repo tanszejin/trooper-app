@@ -42,6 +42,7 @@ function Home() {
       console.log("trip_ids: ", data);
       setTripIds(data);
     } catch (e) {
+      console.log("error when getting user trips");
       console.error(e);
     }
     //   return [{
